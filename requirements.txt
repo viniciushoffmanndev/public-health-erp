@@ -1,0 +1,20 @@
+# ==========================================
+# PUBLIC HEALTH ERP - DEPENDÊNCIAS
+# ==========================================
+
+# 1. Core Framework & Assincronismo
+Django>=5.0.0
+uvicorn[standard]>=0.29.0
+
+# 2. Banco de Dados & PostgreSQL (Neon DB)
+psycopg[binary]>=3.1.18
+dj-database-url>=2.1.0
+
+# 3. Identificadores de Alta Performance (B-Tree)
+uuid6>=2024.1.12
+
+# 4. Segurança & Configuração
+python-dotenv>=1.0.1
+
+# 5. Interface UI Moderna (Tailwind para o Admin)
+django-unfold>=0.22.0
