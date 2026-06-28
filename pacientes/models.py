@@ -1,13 +1,5 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 import uuid6
-
 
 class Pessoa(models.Model):
     cod_pessoa = models.BigIntegerField(primary_key=True, db_comment='Codigo do Cliente')
@@ -27,10 +19,10 @@ class Pessoa(models.Model):
     usuario = models.IntegerField()
     dt_usuario = models.DateField()
     cod_representante = models.ForeignKey('self', models.DO_NOTHING, db_column='cod_representante', blank=True, null=True, db_comment='Codigo do representante')
-    cliente = models.CharField(max_length=1, blank=True, null=True, db_comment='Se a pessoa � um cliente')
-    fornecedor = models.CharField(max_length=1, blank=True, null=True, db_comment='Indica se a pessoa � um fornecedor')
-    funcionario = models.CharField(max_length=1, blank=True, null=True, db_comment='Indica se a pessoa � um funcionario')
-    representante = models.CharField(max_length=1, blank=True, null=True, db_comment='Indica se a pessoa � um representante')
+    cliente = models.CharField(max_length=1, blank=True, null=True, db_comment='Se a pessoa é um cliente')
+    fornecedor = models.CharField(max_length=1, blank=True, null=True, db_comment='Indica se a pessoa é um fornecedor')
+    funcionario = models.CharField(max_length=1, blank=True, null=True, db_comment='Indica se a pessoa é um funcionario')
+    representante = models.CharField(max_length=1, blank=True, null=True, db_comment='Indica se a pessoa é um representante')
     possui_seguro = models.CharField(max_length=1, blank=True, null=True)
     ds_seguradora = models.CharField(max_length=40, blank=True, null=True)
     sexo = models.CharField(max_length=1, blank=True, null=True)
@@ -44,7 +36,7 @@ class Pessoa(models.Model):
     dt_nascimento_conjuge = models.DateField(blank=True, null=True)
     dt_nascimento = models.DateField(blank=True, null=True)
     associado = models.CharField(max_length=1, blank=True, null=True, db_comment='dado especifico cooperja')
-    interno_externo = models.CharField(max_length=1, blank=True, null=True, db_comment='Indica se o cliente e um interno ou externo para algumas valida��es.')
+    interno_externo = models.CharField(max_length=1, blank=True, null=True, db_comment='Indica se o cliente e um interno ou externo para algumas validações.')
     ds_marcacao_exportacao = models.CharField(max_length=200, blank=True, null=True)
     nr_comissao_armador = models.DecimalField(max_digits=12, decimal_places=4, blank=True, null=True)
     perc_comissao = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
@@ -56,18 +48,18 @@ class Pessoa(models.Model):
     class Meta:
         managed = False
         db_table = 'pessoa'
-        db_table_comment = 'Aqui ficar� registrado os dados das pessoas'
+        db_table_comment = 'Aqui ficará registrado os dados das pessoas'
 
 
 class UsuarioCadsus(models.Model):
     cd_usu_cadsus = models.DecimalField(primary_key=True, max_digits=8, decimal_places=0)
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True,db_column='uuid_publico')
+    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True,db_column='uuid_publico')
     nm_usuario = models.CharField(max_length=70)
     sg_sexo = models.CharField(max_length=1)
     nm_mae = models.CharField(max_length=70, blank=True, null=True)
     nm_pai = models.CharField(max_length=70, blank=True, null=True)
     email = models.CharField(max_length=100, blank=True, null=True)
-    cod_cid_nascimento = models.ForeignKey('Cidade', models.DO_NOTHING, db_column='cod_cid_nascimento', blank=True, null=True)
+    cod_cid_nascimento = models.ForeignKey('geografia.Cidade', models.DO_NOTHING, db_column='cod_cid_nascimento', blank=True, null=True)
     cpf = models.CharField(max_length=14, blank=True, null=True)
     rg = models.CharField(max_length=20, blank=True, null=True)
     dt_nascimento = models.DateField()
@@ -77,12 +69,12 @@ class UsuarioCadsus(models.Model):
     cd_raca = models.ForeignKey('Raca', models.DO_NOTHING, db_column='cd_raca', blank=True, null=True)
     cd_estado_civil = models.ForeignKey('EstadoCivil', models.DO_NOTHING, db_column='cd_estado_civil', blank=True, null=True)
     cd_situacao_familiar = models.SmallIntegerField(blank=True, null=True)
-    cd_cbo = models.ForeignKey('TabelaCbo', models.DO_NOTHING, db_column='cd_cbo', blank=True, null=True)
+    cd_cbo = models.ForeignKey('profissionais.TabelaCbo', models.DO_NOTHING, db_column='cd_cbo', blank=True, null=True)
     nr_telefone = models.CharField(max_length=15, blank=True, null=True)
     nr_telefone_2 = models.CharField(max_length=15, blank=True, null=True)
     dt_inclusao = models.DateField()
     dt_preenchimento_form = models.DateField()
-    cd_municipio_residencia = models.ForeignKey('Cidade', models.DO_NOTHING, db_column='cd_municipio_residencia', related_name='usuariocadsus_cd_municipio_residencia_set', blank=True, null=True)
+    cd_municipio_residencia = models.ForeignKey('geografia.Cidade', models.DO_NOTHING, db_column='cd_municipio_residencia', related_name='usuariocadsus_cd_municipio_residencia_set', blank=True, null=True)
     st_sem_documento = models.SmallIntegerField(blank=True, null=True)
     nr_usuario_no_domicilio = models.SmallIntegerField(blank=True, null=True)
     st_vivo = models.SmallIntegerField(blank=True, null=True)
@@ -92,7 +84,7 @@ class UsuarioCadsus(models.Model):
     cd_domicilio = models.BigIntegerField(blank=True, null=True)
     cd_escolaridade = models.ForeignKey('Escolaridade', models.DO_NOTHING, db_column='cd_escolaridade', blank=True, null=True)
     dt_alteracao = models.DateTimeField(blank=True, null=True)
-    empresa_responsavel = models.ForeignKey('Empresa', models.DO_NOTHING, db_column='empresa_responsavel', blank=True, null=True)
+    empresa_responsavel = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa_responsavel', blank=True, null=True)
     situacao = models.SmallIntegerField(blank=True, null=True)
     dt_inativacao = models.DateTimeField(blank=True, null=True)
     dt_fixacao = models.DateField(blank=True, null=True)
@@ -106,7 +98,7 @@ class UsuarioCadsus(models.Model):
     externo = models.CharField(max_length=1, blank=True, null=True)
     version = models.BigIntegerField()
     dt_usuario = models.DateTimeField()
-    cd_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario')
+    cd_usuario = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario')
     observacao = models.CharField(max_length=1024, blank=True, null=True)
     religiao = models.CharField(max_length=50, blank=True, null=True)
     local_trabalho = models.CharField(max_length=50, blank=True, null=True)
@@ -122,9 +114,9 @@ class UsuarioCadsus(models.Model):
     flag_estrangeiro = models.SmallIntegerField(blank=True, null=True)
     flag_nao_possui_cns = models.SmallIntegerField(blank=True, null=True)
     cd_local_permanencia = models.ForeignKey('LocalPermanencia', models.DO_NOTHING, db_column='cd_local_permanencia', blank=True, null=True)
-    nr_atendimento_origem = models.ForeignKey('Atendimento', models.DO_NOTHING, db_column='nr_atendimento_origem', blank=True, null=True)
+    nr_atendimento_origem = models.ForeignKey('atendimentos.Atendimento', models.DO_NOTHING, db_column='nr_atendimento_origem', blank=True, null=True)
     chave_biometria = models.TextField(blank=True, null=True)
-    cd_endereco = models.ForeignKey('EnderecoUsuarioCadsus', models.DO_NOTHING, db_column='cd_endereco', blank=True, null=True)
+    cd_endereco = models.ForeignKey('geografia.EnderecoUsuarioCadsus', models.DO_NOTHING, db_column='cd_endereco', blank=True, null=True)
     nacionalidade = models.SmallIntegerField(blank=True, null=True)
     apelido = models.CharField(max_length=50, blank=True, null=True)
     flag_responsavel_familiar = models.SmallIntegerField(blank=True, null=True)
@@ -142,13 +134,13 @@ class UsuarioCadsus(models.Model):
     referencia = models.CharField(unique=True, max_length=10, blank=True, null=True)
     uuid_tablet = models.CharField(blank=True, null=True)
     profissao = models.CharField(max_length=50, blank=True, null=True)
-    cd_estabelecimento_cerest = models.ForeignKey('EstabelecimentoCerest', models.DO_NOTHING, db_column='cd_estabelecimento_cerest', blank=True, null=True)
-    cd_usuario_cad = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario_cad', related_name='usuariocadsus_cd_usuario_cad_set')
+    cd_estabelecimento_cerest = models.ForeignKey('institucional.EstabelecimentoCerest', models.DO_NOTHING, db_column='cd_estabelecimento_cerest', blank=True, null=True)
+    cd_usuario_cad = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario_cad', related_name='usuariocadsus_cd_usuario_cad_set')
     flag_utiliza_nome_social = models.SmallIntegerField()
     cd_usu_cadsus_unificado = models.ForeignKey('self', models.DO_NOTHING, db_column='cd_usu_cadsus_unificado', related_name='usuariocadsus_cd_usu_cadsus_unificado_set', blank=True, null=True)
     flag_unificado = models.SmallIntegerField()
     responsavel_anterior = models.SmallIntegerField(blank=True, null=True)
-    cd_equipe = models.ForeignKey('Equipe', models.DO_NOTHING, db_column='cd_equipe', blank=True, null=True)
+    cd_equipe = models.ForeignKey('institucional.Equipe', models.DO_NOTHING, db_column='cd_equipe', blank=True, null=True)
     flag_outras_pop_nomades = models.SmallIntegerField()
     nivel_escolaridade = models.SmallIntegerField(blank=True, null=True)
     beneficiario_bolsa_familia = models.SmallIntegerField(blank=True, null=True)
@@ -160,7 +152,7 @@ class UsuarioCadsus(models.Model):
     cd_comunidade = models.ForeignKey('ComunidadeTradicional', models.DO_NOTHING, db_column='cd_comunidade', blank=True, null=True)
     cd_motivo_cpf = models.ForeignKey('UsuarioCadsusMotivoCpf', models.DO_NOTHING, db_column='cd_motivo_cpf', blank=True, null=True)
     flag_visivel_prontuario = models.SmallIntegerField(blank=True, null=True)
-    cd_equipe_vinculo = models.ForeignKey('Equipe', models.DO_NOTHING, db_column='cd_equipe_vinculo', related_name='usuariocadsus_cd_equipe_vinculo_set', blank=True, null=True)
+    cd_equipe_vinculo = models.ForeignKey('institucional.Equipe', models.DO_NOTHING, db_column='cd_equipe_vinculo', related_name='usuariocadsus_cd_equipe_vinculo_set', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -168,14 +160,67 @@ class UsuarioCadsus(models.Model):
 
 
 class UsuarioCadsusHistorico(models.Model):
-    pk = models.CompositePrimaryKey('cd_usu_cadsus', 'dt_alteracao')
-    cd_usu_cadsus = models.ForeignKey(UsuarioCadsus, models.DO_NOTHING, db_column='cd_usu_cadsus')
+    cd_usu_cadsus = models.ForeignKey(UsuarioCadsus, models.DO_NOTHING, db_column='cd_usu_cadsus', primary_key=True)
     dt_alteracao = models.DateTimeField()
-    empresa = models.ForeignKey('Empresa', models.DO_NOTHING, db_column='empresa')
-    cd_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario')
+    empresa = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa')
+    cd_usuario = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario')
     tipo = models.CharField(max_length=1, db_comment='I-Inclusao, A-Alteracao, E-Exclusao.')
     version = models.BigIntegerField()
 
     class Meta:
         managed = False
         db_table = 'usuario_cadsus_historico'
+        unique_together = (('cd_usu_cadsus', 'dt_alteracao'),)
+
+
+# =====================================================================
+# STUBS SECUNDÁRIOS RESTANTES (Proteção Final)
+# =====================================================================
+class Atividade(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='atividade'
+class TipoPessoa(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='tipo_pessoa'
+class Nacionalidade(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='nacionalidade'
+class Raca(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='raca'
+class EstadoCivil(models.Model):
+    class Meta: 
+        managed=False
+        db_table='estado_civil'
+class Escolaridade(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='escolaridade'
+class LocalPermanencia(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='local_permanencia'
+class EtniaIndigena(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='etnia_indigena'
+class GerenciadorArquivo(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='gerenciador_arquivo'
+class EquipeProfissional(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='equipe_profissional'
+class ComunidadeTradicional(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='comunidade_tradicional'
+class UsuarioCadsusMotivoCpf(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='usuario_cadsus_motivo_cpf'
