@@ -3,7 +3,7 @@ import uuid6
 
 class Profissional(models.Model):
     cd_profissional = models.IntegerField(primary_key=True)
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
+    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     nm_profissional = models.CharField(max_length=60)
     cpf = models.CharField(max_length=14, blank=True, null=True)
     rua = models.CharField(max_length=60, blank=True, null=True)
@@ -63,7 +63,7 @@ class Profissional(models.Model):
 
 class TabelaCbo(models.Model):
     cd_cbo = models.CharField(primary_key=True, max_length=10)
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
+    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     ds_cbo = models.CharField(max_length=150)
     cd_grupo_cbo = models.ForeignKey('TabelaSubgrupoCbo', models.DO_NOTHING, db_column='cd_grupo_cbo', blank=True, null=True)
     cd_subgrupo_cbo = models.SmallIntegerField(blank=True, null=True)
@@ -84,7 +84,7 @@ class TabelaCbo(models.Model):
 
 class Usuarios(models.Model):
     cd_usuario = models.DecimalField(primary_key=True, max_digits=6, decimal_places=0)
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
+    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     cd_modulo = models.ForeignKey('Modulo', models.DO_NOTHING, db_column='cd_modulo', blank=True, null=True)
     ds_login = models.CharField(unique=True, max_length=100)
     nm_usuario = models.CharField(max_length=50)
