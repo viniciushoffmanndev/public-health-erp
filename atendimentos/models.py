@@ -12,7 +12,7 @@ import uuid6
 
 class Atendimento(models.Model):
     nr_atendimento = models.BigIntegerField(primary_key=True)
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True,db_column='uuid_publico')
+    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True,db_column='uuid_publico')
     empresa = models.ForeignKey('Empresa', models.DO_NOTHING, db_column='empresa')
     cd_usu_cadsus = models.ForeignKey(UsuarioCadsus, models.DO_NOTHING, db_column='cd_usu_cadsus', blank=True, null=True)
     dt_chegada = models.DateTimeField(blank=True, null=True, db_comment='data do registro do paciente na unidade.')
@@ -28,11 +28,11 @@ class Atendimento(models.Model):
     dt_competencia = models.DateField()
     cd_acao_programatica = models.ForeignKey('AcaoProgramaticaGrupo', models.DO_NOTHING, db_column='cd_acao_programatica', blank=True, null=True)
     cd_grupo_atendimento = models.BigIntegerField(blank=True, null=True)
-    cd_profissional = models.ForeignKey('Profissional', models.DO_NOTHING, db_column='cd_profissional', blank=True, null=True)
+    cd_profissional = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional', blank=True, null=True)
     cd_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario', related_name='atendimento_cd_usuario_set')
     nr_atendimento_origem = models.ForeignKey('self', models.DO_NOTHING, db_column='nr_atendimento_origem', related_name='atendimento_nr_atendimento_origem_set', blank=True, null=True)
     cd_cbo = models.ForeignKey('TabelaCbo', models.DO_NOTHING, db_column='cd_cbo', blank=True, null=True)
-    cd_profissional_responsavel = models.ForeignKey('Profissional', models.DO_NOTHING, db_column='cd_profissional_responsavel', related_name='atendimento_cd_profissional_responsavel_set', blank=True, null=True)
+    cd_profissional_responsavel = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional_responsavel', related_name='atendimento_cd_profissional_responsavel_set', blank=True, null=True)
     cd_cid_principal = models.ForeignKey('Cid', models.DO_NOTHING, db_column='cd_cid_principal', blank=True, null=True)
     cd_cid_secundario = models.ForeignKey('Cid', models.DO_NOTHING, db_column='cd_cid_secundario', related_name='atendimento_cd_cid_secundario_set', blank=True, null=True)
     cd_cla_atendimento = models.ForeignKey('ClassificacaoAtendimento', models.DO_NOTHING, db_column='cd_cla_atendimento', blank=True, null=True)
@@ -76,7 +76,7 @@ class Atendimento(models.Model):
     nasfs = models.IntegerField(blank=True, null=True)
     local_atendimento = models.SmallIntegerField(blank=True, null=True)
     racionalidade_saude = models.SmallIntegerField(blank=True, null=True)
-    cd_profissional_auxiliar = models.ForeignKey('Profissional', models.DO_NOTHING, db_column='cd_profissional_auxiliar', related_name='atendimento_cd_profissional_auxiliar_set', blank=True, null=True)
+    cd_profissional_auxiliar = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional_auxiliar', related_name='atendimento_cd_profissional_auxiliar_set', blank=True, null=True)
     tp_atendimento_odonto = models.SmallIntegerField(blank=True, null=True)
     tp_consulta_odonto = models.SmallIntegerField(blank=True, null=True)
     tp_fornecimento_odonto = models.SmallIntegerField(blank=True, null=True)
@@ -92,7 +92,7 @@ class Atendimento(models.Model):
     valor_subclassificacao_risco = models.SmallIntegerField(blank=True, null=True)
     ds_subclassificacao_risco = models.CharField(max_length=20, blank=True, null=True)
     dt_chamada = models.DateTimeField(blank=True, null=True)
-    cd_profissional_chamada = models.ForeignKey('Profissional', models.DO_NOTHING, db_column='cd_profissional_chamada', related_name='atendimento_cd_profissional_chamada_set', blank=True, null=True)
+    cd_profissional_chamada = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional_chamada', related_name='atendimento_cd_profissional_chamada_set', blank=True, null=True)
     cd_estabelecimento_cerest = models.ForeignKey('EstabelecimentoCerest', models.DO_NOTHING, db_column='cd_estabelecimento_cerest', blank=True, null=True)
     flag_permite_reclassificacao = models.SmallIntegerField(blank=True, null=True)
     dt_reclassificacao = models.DateTimeField(blank=True, null=True)
@@ -152,12 +152,7 @@ class AcaoProgramaticaGrupo(models.Model):
     class Meta: 
         managed = False
         db_table = 'acao_programatica_grupo'
-
-class Profissional(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'profissional'
-
+        
 class TabelaCbo(models.Model):
     class Meta: 
         managed = False
