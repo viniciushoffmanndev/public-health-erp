@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'diagnosticos',
     'institucional',
     'faturamento',
+    'geografia',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
