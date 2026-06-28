@@ -51,7 +51,7 @@ class Empresa(models.Model):
     optante_simples = models.CharField(max_length=1, blank=True, null=True)
     numero_pis_pasep = models.CharField(max_length=11, blank=True, null=True)
     caminho_imagem_padrao = models.CharField(blank=True, null=True)
-    empresa_princ = models.ForeignKey('self', models.DO_NOTHING, db_column='empresa_princ', blank=True, null=True)
+    empresa_princ = models.ForeignKey('self', models.DO_NOTHING, db_column='empresa_princ', blank=True, null=True, related_name='empresa_filhas_set')
     numero_prestador_ipe = models.CharField(max_length=8, blank=True, null=True)
     cd_tipo_prestador_ipe = models.ForeignKey('TipoPrestadorIpe', models.DO_NOTHING, db_column='cd_tipo_prestador_ipe', blank=True, null=True)
     cd_orgao_emissor = models.CharField(max_length=10, blank=True, null=True)
