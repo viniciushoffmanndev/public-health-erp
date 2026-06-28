@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'atendimentos',
     'profissionais',
     'triagem',
+    'diagnosticos',
 ]
 
 MIDDLEWARE = [
