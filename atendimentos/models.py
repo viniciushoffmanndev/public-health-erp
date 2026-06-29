@@ -21,7 +21,7 @@ class Atendimento(models.Model):
     status = models.IntegerField()
     dt_cancelamento = models.DateTimeField(blank=True, null=True)
     ds_obs_cancelamento = models.CharField(max_length=300, blank=True, null=True)
-    cod_motivo = models.ForeignKey('MotivosCancelamento', models.DO_NOTHING, db_column='cod_motivo', blank=True, null=True)
+    cod_motivo = models.ForeignKey('triagem.MotivosCancelamento', models.DO_NOTHING, db_column='cod_motivo', blank=True, null=True)
     cd_usuario_can = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario_can', blank=True, null=True)
     nr_prox_atendimento = models.ForeignKey('self', models.DO_NOTHING, db_column='nr_prox_atendimento', blank=True, null=True)
     cd_procedimento = models.ForeignKey('ProcedimentoCompetencia', models.DO_NOTHING, db_column='cd_procedimento')
@@ -128,11 +128,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class MotivosCancelamento(models.Model):
-    class Meta: 
-        managed = False 
-        db_table = 'motivos_cancelamento'
-
 class Usuarios(models.Model):
     class Meta: 
         managed = False
