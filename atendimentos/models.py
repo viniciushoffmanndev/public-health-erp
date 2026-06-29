@@ -18,6 +18,16 @@ class AcaoProgramaticaGrupo(models.Model): # Tabela não foi inspecionada
     def __str__(self):
         return f"Grupo Programático {self.pk}"
 
+
+class ClassificacaoAtendimento(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'classificacao_atendimento'
+    
+    def __str__(self):
+        return f"Classificação {self.pk}"
+
+
 class Atendimento(models.Model):
     nr_atendimento = models.BigIntegerField(primary_key=True)
     #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True,db_column='uuid_publico')
@@ -136,10 +146,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class ClassificacaoAtendimento(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'classificacao_atendimento'
 
 class Conduta(models.Model):
     class Meta: 
