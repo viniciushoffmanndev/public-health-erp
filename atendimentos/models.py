@@ -101,7 +101,7 @@ class Atendimento(models.Model):
     enc_alta = models.BigIntegerField(blank=True, null=True)
     cd_usu_cadsus_responsavel = models.ForeignKey(UsuarioCadsus, models.DO_NOTHING, db_column='cd_usu_cadsus_responsavel', related_name='atendimento_cd_usu_cadsus_responsavel_set', blank=True, null=True)
     numero_registro_convenio = models.CharField(max_length=50, blank=True, null=True)
-    classificacao_risco = models.ForeignKey('ClassificacaoRisco', models.DO_NOTHING, db_column='classificacao_risco', blank=True, null=True)
+    classificacao_risco = models.ForeignKey('triagem.ClassificacaoRisco', models.DO_NOTHING, db_column='classificacao_risco', blank=True, null=True)
     dt_cadastro = models.DateTimeField(blank=True, null=True)
     cd_procedimento_atendimento = models.ForeignKey('TipoProcedimentoAtendimento', models.DO_NOTHING, db_column='cd_procedimento_atendimento', blank=True, null=True)
     empresa_bpa = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa_bpa', related_name='atendimento_empresa_bpa_set')
@@ -172,11 +172,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class ClassificacaoRisco(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'classificacao_risco'
-
 class TipoProcedimentoAtendimento(models.Model):
     class Meta: 
         managed = False
