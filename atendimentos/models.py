@@ -67,7 +67,7 @@ class Atendimento(models.Model):
     dt_imp_prontuario = models.DateTimeField(blank=True, null=True)
     dt_observacao = models.DateTimeField(blank=True, null=True)
     cd_domicilio = models.ForeignKey('geografia.EnderecoDomicilio', models.DO_NOTHING, db_column='cd_domicilio', blank=True, null=True)
-    cd_endereco = models.ForeignKey('EnderecoUsuarioCadsus', models.DO_NOTHING, db_column='cd_endereco', blank=True, null=True)
+    cd_endereco = models.ForeignKey('geografia.EnderecoUsuarioCadsus', models.DO_NOTHING, db_column='cd_endereco', blank=True, null=True)
     nr_atendimento_principal = models.ForeignKey('self', models.DO_NOTHING, db_column='nr_atendimento_principal', related_name='atendimento_nr_atendimento_principal_set')
     dt_alta = models.DateTimeField(blank=True, null=True)
     seq_ciclo = models.IntegerField(blank=True, null=True)
@@ -155,11 +155,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class EnderecoUsuarioCadsus(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'endereco_usuario_cadsus'
-
 class NaturezaProcuraTpAtendimento(models.Model):
     class Meta: 
         managed = False
