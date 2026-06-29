@@ -39,7 +39,7 @@ class Atendimento(models.Model):
     cd_profissional = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional', blank=True, null=True)
     cd_usuario = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario', related_name='atendimento_cd_usuario_set')
     nr_atendimento_origem = models.ForeignKey('self', models.DO_NOTHING, db_column='nr_atendimento_origem', related_name='atendimento_nr_atendimento_origem_set', blank=True, null=True)
-    cd_cbo = models.ForeignKey('TabelaCbo', models.DO_NOTHING, db_column='cd_cbo', blank=True, null=True)
+    cd_cbo = models.ForeignKey('profissionais.TabelaCbo', models.DO_NOTHING, db_column='cd_cbo', blank=True, null=True)
     cd_profissional_responsavel = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional_responsavel', related_name='atendimento_cd_profissional_responsavel_set', blank=True, null=True)
     cd_cid_principal = models.ForeignKey('Cid', models.DO_NOTHING, db_column='cd_cid_principal', blank=True, null=True)
     cd_cid_secundario = models.ForeignKey('Cid', models.DO_NOTHING, db_column='cd_cid_secundario', related_name='atendimento_cd_cid_secundario_set', blank=True, null=True)
@@ -96,7 +96,7 @@ class Atendimento(models.Model):
     idade_gestacional = models.SmallIntegerField(blank=True, null=True)
     nr_gestas_previas = models.SmallIntegerField(blank=True, null=True)
     nr_partos = models.SmallIntegerField(blank=True, null=True)
-    cd_cbo_auxiliar = models.ForeignKey('TabelaCbo', models.DO_NOTHING, db_column='cd_cbo_auxiliar', related_name='atendimento_cd_cbo_auxiliar_set', blank=True, null=True)
+    cd_cbo_auxiliar = models.ForeignKey('profissionais.TabelaCbo', models.DO_NOTHING, db_column='cd_cbo_auxiliar', related_name='atendimento_cd_cbo_auxiliar_set', blank=True, null=True)
     valor_subclassificacao_risco = models.SmallIntegerField(blank=True, null=True)
     ds_subclassificacao_risco = models.CharField(max_length=20, blank=True, null=True)
     dt_chamada = models.DateTimeField(blank=True, null=True)
@@ -136,12 +136,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-        
-class TabelaCbo(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'tabela_cbo'
-
 class Cid(models.Model):
     class Meta: 
         managed = False 
