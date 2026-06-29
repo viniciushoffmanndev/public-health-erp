@@ -103,7 +103,7 @@ class Atendimento(models.Model):
     numero_registro_convenio = models.CharField(max_length=50, blank=True, null=True)
     classificacao_risco = models.ForeignKey('triagem.ClassificacaoRisco', models.DO_NOTHING, db_column='classificacao_risco', blank=True, null=True)
     dt_cadastro = models.DateTimeField(blank=True, null=True)
-    cd_procedimento_atendimento = models.ForeignKey('TipoProcedimentoAtendimento', models.DO_NOTHING, db_column='cd_procedimento_atendimento', blank=True, null=True)
+    cd_procedimento_atendimento = models.ForeignKey('faturamento.TipoProcedimentoAtendimento', models.DO_NOTHING, db_column='cd_procedimento_atendimento', blank=True, null=True)
     empresa_bpa = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa_bpa', related_name='atendimento_empresa_bpa_set')
     vacina_em_dia = models.SmallIntegerField(blank=True, null=True)
     observacao_marcacao = models.CharField(max_length=500, blank=True, null=True)
@@ -172,11 +172,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class TipoProcedimentoAtendimento(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'tipo_procedimento_atendimento'
-
 class Ciap(models.Model):
     class Meta: 
         managed = False
