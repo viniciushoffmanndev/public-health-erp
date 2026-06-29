@@ -13,7 +13,7 @@ import uuid6
 class Atendimento(models.Model):
     nr_atendimento = models.BigIntegerField(primary_key=True)
     #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True,db_column='uuid_publico')
-    empresa = models.ForeignKey('Empresa', models.DO_NOTHING, db_column='empresa')
+    empresa = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa')
     cd_usu_cadsus = models.ForeignKey(UsuarioCadsus, models.DO_NOTHING, db_column='cd_usu_cadsus', blank=True, null=True)
     dt_chegada = models.DateTimeField(blank=True, null=True, db_comment='data do registro do paciente na unidade.')
     dt_atendimento = models.DateTimeField(blank=True, null=True)
@@ -60,13 +60,13 @@ class Atendimento(models.Model):
     classificacao_risco = models.ForeignKey('ClassificacaoRisco', models.DO_NOTHING, db_column='classificacao_risco', blank=True, null=True)
     dt_cadastro = models.DateTimeField(blank=True, null=True)
     cd_procedimento_atendimento = models.ForeignKey('TipoProcedimentoAtendimento', models.DO_NOTHING, db_column='cd_procedimento_atendimento', blank=True, null=True)
-    empresa_bpa = models.ForeignKey('Empresa', models.DO_NOTHING, db_column='empresa_bpa', related_name='atendimento_empresa_bpa_set')
+    empresa_bpa = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa_bpa', related_name='atendimento_empresa_bpa_set')
     vacina_em_dia = models.SmallIntegerField(blank=True, null=True)
     observacao_marcacao = models.CharField(max_length=500, blank=True, null=True)
     correcao = models.SmallIntegerField(blank=True, null=True)
     paralelo = models.SmallIntegerField(blank=True, null=True)
     dt_validade_convenio = models.DateField(blank=True, null=True)
-    empresa_solicitante = models.ForeignKey('Empresa', models.DO_NOTHING, db_column='empresa_solicitante', related_name='atendimento_empresa_solicitante_set', blank=True, null=True)
+    empresa_solicitante = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa_solicitante', related_name='atendimento_empresa_solicitante_set', blank=True, null=True)
     cd_usuario_atendendo = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario_atendendo', related_name='atendimento_cd_usuario_atendendo_set', blank=True, null=True)
     dt_integracao_inovamfri = models.DateTimeField(blank=True, null=True)
     cd_ciap = models.ForeignKey('Ciap', models.DO_NOTHING, db_column='cd_ciap', blank=True, null=True)
@@ -128,11 +128,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class Empresa(models.Model):
-    class Meta: 
-        managed = False 
-        db_table = 'empresa'
-
 class MotivosCancelamento(models.Model):
     class Meta: 
         managed = False 
