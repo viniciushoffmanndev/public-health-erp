@@ -152,7 +152,7 @@ class Atendimento(models.Model):
     dt_reclassificacao = models.DateTimeField(blank=True, null=True)
     dt_canc_lote = models.DateTimeField(blank=True, null=True)
     flag_consulta = models.SmallIntegerField(blank=True, null=True)
-    cd_equipe = models.ForeignKey('Equipe', models.DO_NOTHING, db_column='cd_equipe', blank=True, null=True)
+    cd_equipe = models.ForeignKey('institucional.Equipe', models.DO_NOTHING, db_column='cd_equipe', blank=True, null=True)
     dt_inicio_agendamento = models.DateTimeField(blank=True, null=True)
     dt_fim_agendamento = models.DateTimeField(blank=True, null=True)
     flag_preencheu_notificacao = models.SmallIntegerField(blank=True, null=True)
@@ -177,12 +177,3 @@ class Atendimento(models.Model):
 
     def __str__(self):
         return f"Atendimento {self.nr_atendimento} - {self.nm_paciente or 'Sem Nome'}"
-
-
-# =====================================================================
-# STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
-# =====================================================================
-class Equipe(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'equipe'
