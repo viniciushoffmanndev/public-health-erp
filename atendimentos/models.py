@@ -37,6 +37,15 @@ class Conduta(models.Model):
         return f"Conduta {self.pk}"
 
 
+class NaturezaProcuraTpAtendimento(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'natureza_procura_tp_atendimento'
+    
+    def __str__(self):
+        return f"Natureza da Procura {self.pk}"
+
+
 class Atendimento(models.Model):
     nr_atendimento = models.BigIntegerField(primary_key=True)
     #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True,db_column='uuid_publico')
@@ -155,11 +164,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class NaturezaProcuraTpAtendimento(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'natureza_procura_tp_atendimento'
-
 class LeitoQuarto(models.Model):
     class Meta: 
         managed = False
