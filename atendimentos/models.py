@@ -41,8 +41,8 @@ class Atendimento(models.Model):
     nr_atendimento_origem = models.ForeignKey('self', models.DO_NOTHING, db_column='nr_atendimento_origem', related_name='atendimento_nr_atendimento_origem_set', blank=True, null=True)
     cd_cbo = models.ForeignKey('profissionais.TabelaCbo', models.DO_NOTHING, db_column='cd_cbo', blank=True, null=True)
     cd_profissional_responsavel = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional_responsavel', related_name='atendimento_cd_profissional_responsavel_set', blank=True, null=True)
-    cd_cid_principal = models.ForeignKey('Cid', models.DO_NOTHING, db_column='cd_cid_principal', blank=True, null=True)
-    cd_cid_secundario = models.ForeignKey('Cid', models.DO_NOTHING, db_column='cd_cid_secundario', related_name='atendimento_cd_cid_secundario_set', blank=True, null=True)
+    cd_cid_principal = models.ForeignKey('diagnosticos.Cid', models.DO_NOTHING, db_column='cd_cid_principal', blank=True, null=True)
+    cd_cid_secundario = models.ForeignKey('diagnosticos.Cid', models.DO_NOTHING, db_column='cd_cid_secundario', related_name='atendimento_cd_cid_secundario_set', blank=True, null=True)
     cd_cla_atendimento = models.ForeignKey('ClassificacaoAtendimento', models.DO_NOTHING, db_column='cd_cla_atendimento', blank=True, null=True)
     cd_conduta = models.ForeignKey('Conduta', models.DO_NOTHING, db_column='cd_conduta', blank=True, null=True)
     dt_imp_prontuario = models.DateTimeField(blank=True, null=True)
@@ -136,11 +136,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class Cid(models.Model):
-    class Meta: 
-        managed = False 
-        db_table = 'cid'
-
 class ClassificacaoAtendimento(models.Model):
     class Meta: 
         managed = False
