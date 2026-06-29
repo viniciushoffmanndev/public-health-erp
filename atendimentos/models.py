@@ -113,7 +113,7 @@ class Atendimento(models.Model):
     empresa_solicitante = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa_solicitante', related_name='atendimento_empresa_solicitante_set', blank=True, null=True)
     cd_usuario_atendendo = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario_atendendo', related_name='atendimento_cd_usuario_atendendo_set', blank=True, null=True)
     dt_integracao_inovamfri = models.DateTimeField(blank=True, null=True)
-    cd_ciap = models.ForeignKey('Ciap', models.DO_NOTHING, db_column='cd_ciap', blank=True, null=True)
+    cd_ciap = models.ForeignKey('diagnosticos.Ciap', models.DO_NOTHING, db_column='cd_ciap', blank=True, null=True)
     flag_gestante = models.SmallIntegerField(blank=True, null=True)
     cd_atv_grupo = models.ForeignKey('AtividadeGrupo', models.DO_NOTHING, db_column='cd_atv_grupo', blank=True, null=True)
     pic = models.IntegerField(blank=True, null=True)
@@ -172,11 +172,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class Ciap(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'ciap'
-
 class AtividadeGrupo(models.Model):
     class Meta: 
         managed = False
