@@ -97,7 +97,7 @@ class Atendimento(models.Model):
     tp_demanda = models.SmallIntegerField()
     prioridade = models.SmallIntegerField()
     cd_leito = models.ForeignKey('LeitoQuarto', models.DO_NOTHING, db_column='cd_leito', blank=True, null=True)
-    cd_convenio = models.ForeignKey('Convenio', models.DO_NOTHING, db_column='cd_convenio', blank=True, null=True)
+    cd_convenio = models.ForeignKey('faturamento.Convenio', models.DO_NOTHING, db_column='cd_convenio', blank=True, null=True)
     enc_alta = models.BigIntegerField(blank=True, null=True)
     cd_usu_cadsus_responsavel = models.ForeignKey(UsuarioCadsus, models.DO_NOTHING, db_column='cd_usu_cadsus_responsavel', related_name='atendimento_cd_usu_cadsus_responsavel_set', blank=True, null=True)
     numero_registro_convenio = models.CharField(max_length=50, blank=True, null=True)
@@ -172,11 +172,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class Convenio(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'convenio'
-
 class ClassificacaoRisco(models.Model):
     class Meta: 
         managed = False
