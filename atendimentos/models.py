@@ -66,7 +66,7 @@ class Atendimento(models.Model):
     cd_conduta = models.ForeignKey('Conduta', models.DO_NOTHING, db_column='cd_conduta', blank=True, null=True)
     dt_imp_prontuario = models.DateTimeField(blank=True, null=True)
     dt_observacao = models.DateTimeField(blank=True, null=True)
-    cd_domicilio = models.ForeignKey('EnderecoDomicilio', models.DO_NOTHING, db_column='cd_domicilio', blank=True, null=True)
+    cd_domicilio = models.ForeignKey('geografia.EnderecoDomicilio', models.DO_NOTHING, db_column='cd_domicilio', blank=True, null=True)
     cd_endereco = models.ForeignKey('EnderecoUsuarioCadsus', models.DO_NOTHING, db_column='cd_endereco', blank=True, null=True)
     nr_atendimento_principal = models.ForeignKey('self', models.DO_NOTHING, db_column='nr_atendimento_principal', related_name='atendimento_nr_atendimento_principal_set')
     dt_alta = models.DateTimeField(blank=True, null=True)
@@ -155,13 +155,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-
-
-class EnderecoDomicilio(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'endereco_domicilio'
-
 class EnderecoUsuarioCadsus(models.Model):
     class Meta: 
         managed = False
