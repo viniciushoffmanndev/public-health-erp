@@ -10,6 +10,14 @@ from pacientes.models import UsuarioCadsus
 import uuid6
 
 
+class AcaoProgramaticaGrupo(models.Model): # Tabela não foi inspecionada 
+    class Meta: 
+        managed = False
+        db_table = 'acao_programatica_grupo'
+    
+    def __str__(self):
+        return f"Grupo Programático {self.pk}"
+
 class Atendimento(models.Model):
     nr_atendimento = models.BigIntegerField(primary_key=True)
     #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True,db_column='uuid_publico')
@@ -128,10 +136,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class AcaoProgramaticaGrupo(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'acao_programatica_grupo'
         
 class TabelaCbo(models.Model):
     class Meta: 
