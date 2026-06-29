@@ -147,7 +147,7 @@ class Atendimento(models.Model):
     ds_subclassificacao_risco = models.CharField(max_length=20, blank=True, null=True)
     dt_chamada = models.DateTimeField(blank=True, null=True)
     cd_profissional_chamada = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional_chamada', related_name='atendimento_cd_profissional_chamada_set', blank=True, null=True)
-    cd_estabelecimento_cerest = models.ForeignKey('EstabelecimentoCerest', models.DO_NOTHING, db_column='cd_estabelecimento_cerest', blank=True, null=True)
+    cd_estabelecimento_cerest = models.ForeignKey('institucional.EstabelecimentoCerest', models.DO_NOTHING, db_column='cd_estabelecimento_cerest', blank=True, null=True)
     flag_permite_reclassificacao = models.SmallIntegerField(blank=True, null=True)
     dt_reclassificacao = models.DateTimeField(blank=True, null=True)
     dt_canc_lote = models.DateTimeField(blank=True, null=True)
@@ -182,11 +182,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class EstabelecimentoCerest(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'estabelecimento_cerest'
-
 class Equipe(models.Model):
     class Meta: 
         managed = False
