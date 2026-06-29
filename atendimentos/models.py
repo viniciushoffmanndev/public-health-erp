@@ -24,7 +24,7 @@ class Atendimento(models.Model):
     cod_motivo = models.ForeignKey('triagem.MotivosCancelamento', models.DO_NOTHING, db_column='cod_motivo', blank=True, null=True)
     cd_usuario_can = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario_can', blank=True, null=True)
     nr_prox_atendimento = models.ForeignKey('self', models.DO_NOTHING, db_column='nr_prox_atendimento', blank=True, null=True)
-    cd_procedimento = models.ForeignKey('ProcedimentoCompetencia', models.DO_NOTHING, db_column='cd_procedimento')
+    cd_procedimento = models.ForeignKey('faturamento.ProcedimentoCompetencia', models.DO_NOTHING, db_column='cd_procedimento')
     dt_competencia = models.DateField()
     cd_acao_programatica = models.ForeignKey('AcaoProgramaticaGrupo', models.DO_NOTHING, db_column='cd_acao_programatica', blank=True, null=True)
     cd_grupo_atendimento = models.BigIntegerField(blank=True, null=True)
@@ -128,11 +128,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class ProcedimentoCompetencia(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'procedimento_competencia'
-
 class AcaoProgramaticaGrupo(models.Model):
     class Meta: 
         managed = False
