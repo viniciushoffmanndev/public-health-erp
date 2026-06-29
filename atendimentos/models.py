@@ -22,14 +22,14 @@ class Atendimento(models.Model):
     dt_cancelamento = models.DateTimeField(blank=True, null=True)
     ds_obs_cancelamento = models.CharField(max_length=300, blank=True, null=True)
     cod_motivo = models.ForeignKey('triagem.MotivosCancelamento', models.DO_NOTHING, db_column='cod_motivo', blank=True, null=True)
-    cd_usuario_can = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario_can', blank=True, null=True)
+    cd_usuario_can = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario_can', blank=True, null=True)
     nr_prox_atendimento = models.ForeignKey('self', models.DO_NOTHING, db_column='nr_prox_atendimento', blank=True, null=True)
     cd_procedimento = models.ForeignKey('ProcedimentoCompetencia', models.DO_NOTHING, db_column='cd_procedimento')
     dt_competencia = models.DateField()
     cd_acao_programatica = models.ForeignKey('AcaoProgramaticaGrupo', models.DO_NOTHING, db_column='cd_acao_programatica', blank=True, null=True)
     cd_grupo_atendimento = models.BigIntegerField(blank=True, null=True)
     cd_profissional = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional', blank=True, null=True)
-    cd_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario', related_name='atendimento_cd_usuario_set')
+    cd_usuario = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario', related_name='atendimento_cd_usuario_set')
     nr_atendimento_origem = models.ForeignKey('self', models.DO_NOTHING, db_column='nr_atendimento_origem', related_name='atendimento_nr_atendimento_origem_set', blank=True, null=True)
     cd_cbo = models.ForeignKey('TabelaCbo', models.DO_NOTHING, db_column='cd_cbo', blank=True, null=True)
     cd_profissional_responsavel = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional_responsavel', related_name='atendimento_cd_profissional_responsavel_set', blank=True, null=True)
@@ -67,7 +67,7 @@ class Atendimento(models.Model):
     paralelo = models.SmallIntegerField(blank=True, null=True)
     dt_validade_convenio = models.DateField(blank=True, null=True)
     empresa_solicitante = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa_solicitante', related_name='atendimento_empresa_solicitante_set', blank=True, null=True)
-    cd_usuario_atendendo = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario_atendendo', related_name='atendimento_cd_usuario_atendendo_set', blank=True, null=True)
+    cd_usuario_atendendo = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario_atendendo', related_name='atendimento_cd_usuario_atendendo_set', blank=True, null=True)
     dt_integracao_inovamfri = models.DateTimeField(blank=True, null=True)
     cd_ciap = models.ForeignKey('Ciap', models.DO_NOTHING, db_column='cd_ciap', blank=True, null=True)
     flag_gestante = models.SmallIntegerField(blank=True, null=True)
@@ -128,11 +128,6 @@ class Atendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class Usuarios(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'usuarios'
-
 class ProcedimentoCompetencia(models.Model):
     class Meta:
         managed = False
