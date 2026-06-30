@@ -1,6 +1,16 @@
 from django.db import models
 import uuid6
 
+
+class Atividade(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='atividade'
+
+    def __str__(self):
+        return f"Atividade {self.pk}"
+
+
 class Pessoa(models.Model):
     cod_pessoa = models.BigIntegerField(primary_key=True, db_comment='Codigo do Cliente')
     public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True,db_column='uuid_publico')
@@ -176,50 +186,56 @@ class UsuarioCadsusHistorico(models.Model):
 # =====================================================================
 # STUBS SECUNDÁRIOS RESTANTES (Proteção Final)
 # =====================================================================
-class Atividade(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='atividade'
 class TipoPessoa(models.Model): 
     class Meta: 
         managed=False
         db_table='tipo_pessoa'
+
 class Nacionalidade(models.Model): 
     class Meta: 
         managed=False
         db_table='nacionalidade'
+
 class Raca(models.Model): 
     class Meta: 
         managed=False
         db_table='raca'
+
 class EstadoCivil(models.Model):
     class Meta: 
         managed=False
         db_table='estado_civil'
+
 class Escolaridade(models.Model): 
     class Meta: 
         managed=False
         db_table='escolaridade'
+
 class LocalPermanencia(models.Model): 
     class Meta: 
         managed=False
         db_table='local_permanencia'
+
 class EtniaIndigena(models.Model): 
     class Meta: 
         managed=False
         db_table='etnia_indigena'
+
 class GerenciadorArquivo(models.Model): 
     class Meta: 
         managed=False
         db_table='gerenciador_arquivo'
+        
 class EquipeProfissional(models.Model): 
     class Meta: 
         managed=False
         db_table='equipe_profissional'
+
 class ComunidadeTradicional(models.Model): 
     class Meta: 
         managed=False
         db_table='comunidade_tradicional'
+
 class UsuarioCadsusMotivoCpf(models.Model): 
     class Meta: 
         managed=False
