@@ -45,6 +45,52 @@ class CnesProcesso(models.Model):
 
     def __str__(self):
         return f"Processo CNES {self.pk}"
+    
+
+
+class EmpresaMantenedora(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'empresa_mantenedora'
+
+    def __str__(self):
+        return f"Mantenedora {self.pk}"
+
+
+class EsferaAdministrativa(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'esfera_administrativa'
+
+    def __str__(self):
+        return f"Esfera Administrativa {self.pk}"
+
+
+class NivelHierarquia(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'nivel_hierarquia'
+
+    def __str__(self):
+        return f"Nível Hierarquia {self.pk}"
+
+
+class TurnoAtendimento(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'turno_atendimento'
+
+    def __str__(self):
+        return f"Turno Atendimento {self.pk}"
+
+
+class Microrregiao(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'microrregiao'
+
+    def __str__(self):
+        return f"Microrregião {self.pk}"
 
 
 class Empresa(models.Model):
@@ -246,26 +292,6 @@ class Modulo(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP
 # =====================================================================
-class EmpresaMantenedora(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'empresa_mantenedora'
-
-class EsferaAdministrativa(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'esfera_administrativa'
-
-class NivelHierarquia(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'nivel_hierarquia'
-
-class TurnoAtendimento(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'turno_atendimento'
-
 class Conta(models.Model):
     class Meta: 
         managed = False
@@ -281,10 +307,6 @@ class Usuarios(models.Model):
         managed = False
         db_table = 'usuarios'
 
-class Microrregiao(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'microrregiao'
 
 
 class Estado(models.Model):
