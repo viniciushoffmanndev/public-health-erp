@@ -38,6 +38,16 @@ class ProcedimentoFormaOrganizacao(models.Model):
         return f"Forma de Organização {self.pk}"
 
 
+class TipoTabelaProcedimento(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'tipo_tabela_procedimento'
+
+
+    
+
+
+
 class ProcedimentoCompetencia(models.Model):
     public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     cd_procedimento = models.ForeignKey('Procedimento', models.DO_NOTHING, db_column='cd_procedimento', primary_key=True)
@@ -125,10 +135,6 @@ class TipoProcedimentoAtendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP
 # =====================================================================
-class TipoTabelaProcedimento(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'tipo_tabela_procedimento'
 
 class GerenciadorArquivo(models.Model):
     class Meta: 
