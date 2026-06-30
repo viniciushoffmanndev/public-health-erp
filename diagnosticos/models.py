@@ -2,6 +2,15 @@ from django.db import models
 import uuid6
 
 
+class CidClassificacao(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'cid_classificacao'
+    
+    def __str__(self):
+        return f"Classificação CID {self.pk}"
+
+
 class Cid(models.Model):
     cd_cid = models.CharField(primary_key=True, max_length=8)
     public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
@@ -47,11 +56,3 @@ class Ciap(models.Model):
 
     def __str__(self):
         return f"CIAP {self.referencia} - {self.titulo_original}"
-
-# =====================================================================
-# STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
-# =====================================================================
-class CidClassificacao(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'cid_classificacao'
