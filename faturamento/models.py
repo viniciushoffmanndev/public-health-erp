@@ -11,6 +11,15 @@ class Procedimento(models.Model):
         return f"Procedimento {self.pk}"
 
 
+class ProcedimentoFinanciamento(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'procedimento_financiamento'
+
+    def __str__(self):
+        return f"Financiamento {self.pk}"
+
+
 class ProcedimentoCompetencia(models.Model):
     public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     cd_procedimento = models.ForeignKey('Procedimento', models.DO_NOTHING, db_column='cd_procedimento', primary_key=True)
@@ -98,11 +107,6 @@ class TipoProcedimentoAtendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP
 # =====================================================================
-class ProcedimentoFinanciamento(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'procedimento_financiamento'
-
 class ProcedimentoRubrica(models.Model):
     class Meta: 
         managed = False
