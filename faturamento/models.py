@@ -43,9 +43,17 @@ class TipoTabelaProcedimento(models.Model):
         managed = False
         db_table = 'tipo_tabela_procedimento'
 
+        def __str__(self):
+            return f"Tipo Tabela {self.pk}"
 
-    
 
+class GerenciadorArquivo(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'gerenciador_arquivo'
+
+        def __str__(self):
+            return f"Gerenciador de Arquivo {self.pk}"
 
 
 class ProcedimentoCompetencia(models.Model):
@@ -135,12 +143,6 @@ class TipoProcedimentoAtendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP
 # =====================================================================
-
-class GerenciadorArquivo(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'gerenciador_arquivo'
-
 class NaturezaProcuraTpAtendimento(models.Model):
     class Meta: 
         managed = False
