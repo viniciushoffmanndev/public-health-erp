@@ -69,9 +69,18 @@ class EtniaIndigena(models.Model):
     class Meta: 
         managed=False
         db_table='etnia_indigena'
-        
+
     def __str__(self):
         return f"Etnia Indígena {self.pk}"
+    
+    
+class GerenciadorArquivo(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='gerenciador_arquivo'
+    
+    def __str__(self):
+        return f"Gerenciador Arquivo {self.pk}"
 
 
 class Pessoa(models.Model):
@@ -249,11 +258,6 @@ class UsuarioCadsusHistorico(models.Model):
 # =====================================================================
 # STUBS SECUNDÁRIOS RESTANTES (Proteção Final)
 # =====================================================================
-class GerenciadorArquivo(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='gerenciador_arquivo'
-        
 class EquipeProfissional(models.Model): 
     class Meta: 
         managed=False
