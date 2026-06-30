@@ -126,8 +126,8 @@ class TipoProcedimentoAtendimento(models.Model):
     version = models.BigIntegerField()
     flag_reserva = models.SmallIntegerField()
     flag_exibir_pagina = models.SmallIntegerField()
-    cd_nat_proc_tp_atendimento_ag = models.ForeignKey('NaturezaProcuraTpAtendimento', models.DO_NOTHING, db_column='cd_nat_proc_tp_atendimento_ag', blank=True, null=True)
-    cd_nat_proc_tp_atendimento_at = models.ForeignKey('NaturezaProcuraTpAtendimento', models.DO_NOTHING, db_column='cd_nat_proc_tp_atendimento_at', related_name='tipoprocedimentoatendimento_cd_nat_proc_tp_atendimento_at_set', blank=True, null=True)
+    cd_nat_proc_tp_atendimento_ag = models.ForeignKey('atendimentos.NaturezaProcuraTpAtendimento', models.DO_NOTHING, db_column='cd_nat_proc_tp_atendimento_ag', blank=True, null=True)
+    cd_nat_proc_tp_atendimento_at = models.ForeignKey('atendimentos.NaturezaProcuraTpAtendimento', models.DO_NOTHING, db_column='cd_nat_proc_tp_atendimento_at', related_name='tipoprocedimentoatendimento_cd_nat_proc_tp_atendimento_at_set', blank=True, null=True)
     flag_fila_procedimentos = models.SmallIntegerField(blank=True, null=True)
     flag_dis_confirmacao_presenca = models.SmallIntegerField(blank=True, null=True)
     flag_marcacao_consulta = models.SmallIntegerField(blank=True, null=True)
@@ -138,12 +138,3 @@ class TipoProcedimentoAtendimento(models.Model):
 
     def __str__(self):
         return self.ds_procedimento_atendimento
-
-
-# =====================================================================
-# STUBS TEMPORÁRIOS PARA ESTE APP
-# =====================================================================
-class NaturezaProcuraTpAtendimento(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'natureza_procura_tp_atendimento'
