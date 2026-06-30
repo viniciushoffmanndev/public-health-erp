@@ -16,7 +16,7 @@ class Profissional(models.Model):
     dt_nascimento = models.DateField(blank=True, null=True)
     sexo = models.CharField(max_length=1, blank=True, null=True)
     tp_sus_nao_sus = models.CharField(max_length=1, blank=True, null=True)
-    cd_tipo_logradouro = models.ForeignKey('TipoLogradouroCnes', models.DO_NOTHING, db_column='cd_tipo_logradouro', blank=True, null=True)
+    cd_tipo_logradouro = models.ForeignKey('geografia.TipoLogradouroCnes', models.DO_NOTHING, db_column='cd_tipo_logradouro', blank=True, null=True)
     cep = models.CharField(max_length=8, blank=True, null=True)
     cd_orgao_emissor = models.ForeignKey('OrgaoEmissor', models.DO_NOTHING, db_column='cd_orgao_emissor', blank=True, null=True)
     nr_rg = models.CharField(max_length=15, blank=True, null=True)
@@ -143,11 +143,6 @@ class Usuarios(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class TipoLogradouroCnes(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'tipo_logradouro_cnes'
-
 class OrgaoEmissor(models.Model):
     class Meta:
         managed = False
