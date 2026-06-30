@@ -2,6 +2,33 @@ from django.db import models
 import uuid6
 
 
+class TipoEquipe(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'tipo_equipe'
+
+    def __str__(self):
+        return f"Tipo Equipe {self.pk}"
+
+
+class MotivoDesativacao(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'motivo_desativacao'
+
+    def __str__(self):
+        return f"Motivo Desativação {self.pk}"
+
+
+class EquipeArea(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'equipe_area'
+
+    def __str__(self):
+        return f"Equipe Área {self.pk}"
+
+
 class TipoPrestadorIpe(models.Model):
     class Meta: 
         managed = False
@@ -259,20 +286,6 @@ class Microrregiao(models.Model):
         managed = False
         db_table = 'microrregiao'
 
-class TipoEquipe(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'tipo_equipe'
-
-class MotivoDesativacao(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'motivo_desativacao'
-
-class EquipeArea(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'equipe_area'
 
 class Estado(models.Model):
     class Meta: 
