@@ -113,7 +113,7 @@ class TabelaCbo(models.Model):
 class Usuarios(models.Model):
     cd_usuario = models.DecimalField(primary_key=True, max_digits=6, decimal_places=0)
     #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
-    cd_modulo = models.ForeignKey('Modulo', models.DO_NOTHING, db_column='cd_modulo', blank=True, null=True)
+    cd_modulo = models.ForeignKey('institucional.Modulo', models.DO_NOTHING, db_column='cd_modulo', blank=True, null=True)
     ds_login = models.CharField(unique=True, max_length=100)
     nm_usuario = models.CharField(max_length=50)
     dt_criacao = models.DateField()
@@ -122,11 +122,11 @@ class Usuarios(models.Model):
     ds_nivel = models.CharField(max_length=1)
     navegador_padrao = models.CharField(max_length=200, blank=True, null=True, db_comment='Qual o navegador de paginas que o usuario utiliza.')
     dir_temp = models.CharField(max_length=50, blank=True, null=True)
-    empresa_padrao = models.ForeignKey('Empresa', models.DO_NOTHING, db_column='empresa_padrao', blank=True, null=True)
+    empresa_padrao = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa_padrao', blank=True, null=True)
     ds_email = models.CharField(max_length=100, blank=True, null=True)
     cd_profissional = models.ForeignKey('Profissional', models.DO_NOTHING, db_column='cd_profissional', blank=True, null=True, related_name='usuario_profissional_set')
     exibe_nome_atalho = models.CharField(max_length=1, blank=True, null=True)
-    cod_centro_custo = models.ForeignKey('CentroCusto', models.DO_NOTHING, db_column='cod_centro_custo', blank=True, null=True)
+    cod_centro_custo = models.ForeignKey('institucional.CentroCusto', models.DO_NOTHING, db_column='cod_centro_custo', blank=True, null=True)
     tempo_sessao = models.IntegerField(blank=True, null=True)
     dt_ult_acesso = models.DateTimeField(blank=True, null=True)
     qt_acesso = models.SmallIntegerField(blank=True, null=True)
@@ -171,21 +171,6 @@ class Usuarios(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class Modulo(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'modulo'
-
-class Empresa(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'empresa'
-
-class CentroCusto(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'centro_custo'
-
 class GerenciadorArquivo(models.Model):
     class Meta:
         managed = False
