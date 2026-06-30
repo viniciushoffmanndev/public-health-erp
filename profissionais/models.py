@@ -9,6 +9,24 @@ class OrgaoEmissor(models.Model):
 
     def __str__(self):
         return f"Órgão emissor {self.pk}"
+    
+
+class TabelaSubgrupoCbo(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'tabela_subgrupo_cbo'
+
+    def __str__(self):
+        return f"Subgrupo CBO {self.pk}"
+
+
+class TabelaCboGrupoAtendimento(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'tabela_cbo_grupo_atendimento'
+
+    def __str__(self):
+        return f"Grupo Atendimento CBO {self.pk}"
 
 
 class Profissional(models.Model):
@@ -153,16 +171,6 @@ class Usuarios(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class TabelaSubgrupoCbo(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'tabela_subgrupo_cbo'
-
-class TabelaCboGrupoAtendimento(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'tabela_cbo_grupo_atendimento'
-
 class Modulo(models.Model):
     class Meta:
         managed = False
