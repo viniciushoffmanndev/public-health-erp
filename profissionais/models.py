@@ -27,6 +27,15 @@ class TabelaCboGrupoAtendimento(models.Model):
 
     def __str__(self):
         return f"Grupo Atendimento CBO {self.pk}"
+    
+
+class ProgramaWeb(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'programa_web'
+
+    def __str__(self):
+        return f"Programa Web {self.pk}"
 
 
 class Profissional(models.Model):
@@ -143,7 +152,7 @@ class Usuarios(models.Model):
     cpf = models.CharField(max_length=11, blank=True, null=True)
     id_integracao = models.CharField(blank=True, null=True)
     telefone = models.CharField(max_length=15, blank=True, null=True)
-    cd_certificado_digital = models.ForeignKey('GerenciadorArquivo', models.DO_NOTHING, db_column='cd_certificado_digital', blank=True, null=True)
+    cd_certificado_digital = models.ForeignKey('faturamento.GerenciadorArquivo', models.DO_NOTHING, db_column='cd_certificado_digital', blank=True, null=True)
     cd_prg_web = models.ForeignKey('ProgramaWeb', models.DO_NOTHING, db_column='cd_prg_web', blank=True, null=True)
     ds_cargo = models.CharField(max_length=50, blank=True, null=True)
     flag_termo_uso = models.SmallIntegerField(blank=True, null=True)
@@ -166,17 +175,3 @@ class Usuarios(models.Model):
 
     def __str__(self):
         return f"{self.ds_login} - {self.nm_usuario}"
-
-
-# =====================================================================
-# STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
-# =====================================================================
-class GerenciadorArquivo(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'gerenciador_arquivo'
-
-class ProgramaWeb(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'programa_web'
