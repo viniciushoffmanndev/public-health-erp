@@ -54,7 +54,7 @@ class Profissional(models.Model):
     cd_tipo_prestador_ipe = models.ForeignKey('institucional.TipoPrestadorIpe', models.DO_NOTHING, db_column='cd_tipo_prestador_ipe', blank=True, null=True)
     uf_conselho_reg = models.CharField(max_length=2, blank=True, null=True)
     chave_biometria = models.TextField(blank=True, null=True)
-    cd_cnes_processo = models.ForeignKey('CnesProcesso', models.DO_NOTHING, db_column='cd_cnes_processo', blank=True, null=True)
+    cd_cnes_processo = models.ForeignKey('institucional.CnesProcesso', models.DO_NOTHING, db_column='cd_cnes_processo', blank=True, null=True)
     flag_fiscal_visa = models.SmallIntegerField(blank=True, null=True)
     flag_fiscal_capacitado = models.SmallIntegerField(blank=True, null=True)
     escolaridade = models.SmallIntegerField(blank=True, null=True)
@@ -153,11 +153,6 @@ class Usuarios(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class CnesProcesso(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'cnes_processo'
-
 class TabelaSubgrupoCbo(models.Model):
     class Meta:
         managed = False
