@@ -24,13 +24,13 @@ class Empresa(models.Model):
     empresa = models.IntegerField(primary_key=True)
     public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     descricao = models.CharField(max_length=60)
-    cod_atv = models.ForeignKey('Atividade', models.DO_NOTHING, db_column='cod_atv', blank=True, null=True)
+    cod_atv = models.ForeignKey('pacientes.Atividade', models.DO_NOTHING, db_column='cod_atv', blank=True, null=True)
     fantasia = models.CharField(max_length=60, blank=True, null=True)
     rua = models.CharField(max_length=60, blank=True, null=True)
     bairro = models.CharField(max_length=60, blank=True, null=True)
     telefone = models.CharField(max_length=20, blank=True, null=True)
-    cod_cid = models.ForeignKey('Cidade', models.DO_NOTHING, db_column='cod_cid')
-    cod_pessoa = models.ForeignKey('Pessoa', models.DO_NOTHING, db_column='cod_pessoa', blank=True, null=True, db_comment='Codigo do Cliente')
+    cod_cid = models.ForeignKey('geografia.Cidade', models.DO_NOTHING, db_column='cod_cid')
+    cod_pessoa = models.ForeignKey('pacientes.Pessoa', models.DO_NOTHING, db_column='cod_pessoa', blank=True, null=True, db_comment='Codigo do Cliente')
     fax = models.CharField(max_length=20, blank=True, null=True)
     email = models.CharField(max_length=60, blank=True, null=True)
     cep = models.CharField(max_length=15, blank=True, null=True)
@@ -41,7 +41,7 @@ class Empresa(models.Model):
     titulo_janela = models.CharField(max_length=60, blank=True, null=True)
     nome_relatorio = models.CharField(max_length=380, blank=True, null=True)
     sigla = models.CharField(max_length=15, blank=True, null=True, db_comment='Sigla da empresa')
-    cd_profissional = models.ForeignKey('Profissional', models.DO_NOTHING, db_column='cd_profissional', blank=True, null=True)
+    cd_profissional = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional', blank=True, null=True)
     cnes = models.CharField(max_length=7, blank=True, null=True)
     cnpj_mantenedora = models.ForeignKey('EmpresaMantenedora', models.DO_NOTHING, db_column='cnpj_mantenedora', blank=True, null=True)
     fis_jur = models.CharField(max_length=1, blank=True, null=True)
@@ -73,7 +73,7 @@ class Empresa(models.Model):
     numero_prestador_ipe = models.CharField(max_length=8, blank=True, null=True)
     cd_tipo_prestador_ipe = models.ForeignKey('TipoPrestadorIpe', models.DO_NOTHING, db_column='cd_tipo_prestador_ipe', blank=True, null=True)
     cd_orgao_emissor = models.CharField(max_length=10, blank=True, null=True)
-    cd_prof_diretor = models.ForeignKey('Profissional', models.DO_NOTHING, db_column='cd_prof_diretor', related_name='empresa_cd_prof_diretor_set', blank=True, null=True)
+    cd_prof_diretor = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_prof_diretor', related_name='empresa_cd_prof_diretor_set', blank=True, null=True)
     acesso_restrito = models.SmallIntegerField()
     local_atendimento = models.SmallIntegerField(blank=True, null=True)
     dt_integracao_inovamfri = models.DateTimeField(blank=True, null=True)
@@ -84,7 +84,7 @@ class Empresa(models.Model):
     rua_adicional = models.CharField(max_length=60, blank=True, null=True)
     numero_adicional = models.CharField(max_length=6, blank=True, null=True)
     bairro_adicional = models.CharField(max_length=60, blank=True, null=True)
-    cod_cid_adicional = models.ForeignKey('Cidade', models.DO_NOTHING, db_column='cod_cid_adicional', related_name='empresa_cod_cid_adicional_set', blank=True, null=True)
+    cod_cid_adicional = models.ForeignKey('geografia.Cidade', models.DO_NOTHING, db_column='cod_cid_adicional', related_name='empresa_cod_cid_adicional_set', blank=True, null=True)
     cep_adicional = models.CharField(max_length=15, blank=True, null=True)
     consorciado_ativo = models.SmallIntegerField(blank=True, null=True)
     celular = models.CharField(max_length=20, blank=True, null=True)
@@ -166,7 +166,7 @@ class EstabelecimentoCerest(models.Model):
     bairro = models.CharField(max_length=100, blank=True, null=True)
     complemento = models.CharField(max_length=100, blank=True, null=True)
     cep = models.CharField(max_length=10, blank=True, null=True)
-    cod_cid = models.ForeignKey('Cidade', models.DO_NOTHING, db_column='cod_cid', blank=True, null=True)
+    cod_cid = models.ForeignKey('geografia.Cidade', models.DO_NOTHING, db_column='cod_cid', blank=True, null=True)
     cod_est = models.ForeignKey('Estado', models.DO_NOTHING, db_column='cod_est', blank=True, null=True)
     situacao = models.SmallIntegerField()
     dt_cadastro = models.DateTimeField()
@@ -219,26 +219,6 @@ class Modulo(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP
 # =====================================================================
-class Atividade(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'atividade'
-
-class Cidade(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'cidade'
-
-class Pessoa(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'pessoa'
-
-class Profissional(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'profissional'
-
 class EmpresaMantenedora(models.Model):
     class Meta: 
         managed = False
