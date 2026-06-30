@@ -73,7 +73,7 @@ class EtniaIndigena(models.Model):
     def __str__(self):
         return f"Etnia Indígena {self.pk}"
     
-    
+
 class GerenciadorArquivo(models.Model): 
     class Meta: 
         managed=False
@@ -81,6 +81,33 @@ class GerenciadorArquivo(models.Model):
     
     def __str__(self):
         return f"Gerenciador Arquivo {self.pk}"
+    
+
+class EquipeProfissional(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='equipe_profissional'
+
+    def __str__(self):
+        return f"Equipe Profissional {self.pk}"
+
+
+class ComunidadeTradicional(models.Model): 
+    class Meta: 
+        managed=False
+        db_table='comunidade_tradicional'
+
+    def __str__(self):
+        return f"Comunidade Tradicional {self.pk}"
+
+
+class UsuarioCadsusMotivoCpf(models.Model):
+    class Meta: 
+        managed=False
+        db_table='usuario_cadsus_motivo_cpf'
+
+    def __str__(self):
+        return f"Motivo CPF {self.pk}"
 
 
 class Pessoa(models.Model):
@@ -253,22 +280,3 @@ class UsuarioCadsusHistorico(models.Model):
         managed = False
         db_table = 'usuario_cadsus_historico'
         unique_together = (('cd_usu_cadsus', 'dt_alteracao'),)
-
-
-# =====================================================================
-# STUBS SECUNDÁRIOS RESTANTES (Proteção Final)
-# =====================================================================
-class EquipeProfissional(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='equipe_profissional'
-
-class ComunidadeTradicional(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='comunidade_tradicional'
-
-class UsuarioCadsusMotivoCpf(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='usuario_cadsus_motivo_cpf'
