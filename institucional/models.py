@@ -11,6 +11,15 @@ class TipoPrestadorIpe(models.Model):
         return f"Tipo Prestador IPE {self.pk}"
 
 
+class CnesProcesso(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'cnes_processo'
+
+    def __str__(self):
+        return f"Processo CNES {self.pk}"
+
+
 class Empresa(models.Model):
     empresa = models.IntegerField(primary_key=True)
     public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
@@ -254,12 +263,6 @@ class Conta(models.Model):
     class Meta: 
         managed = False
         db_table = 'conta'
-
-
-class CnesProcesso(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'cnes_processo'
 
 class EndEstruturadoDistrito(models.Model):
     class Meta: 
