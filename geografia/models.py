@@ -48,7 +48,7 @@ class EnderecoDomicilio(models.Model):
     st_excluido = models.SmallIntegerField(db_comment='0 = ativo; 1 = excluído.')
     cd_domicilio_interno = models.CharField(max_length=50, blank=True, null=True, db_comment='codigo do domicilio dentro do cadsus (integrador)')
     cd_endereco = models.ForeignKey('EnderecoUsuarioCadsus', models.DO_NOTHING, db_column='cd_endereco')
-    cd_profissional = models.ForeignKey('Profissional', models.DO_NOTHING, db_column='cd_profissional', blank=True, null=True)
+    cd_profissional = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional', blank=True, null=True)
     dt_alteracao = models.DateTimeField(blank=True, null=True)
     possui_plano = models.CharField(max_length=1, blank=True, null=True)
     nr_pessoa_coberta_plano = models.IntegerField(blank=True, null=True)
@@ -63,7 +63,7 @@ class EnderecoDomicilio(models.Model):
     ds_outros_meio_transporte = models.CharField(max_length=50, blank=True, null=True)
     observacao = models.CharField(max_length=1024, blank=True, null=True)
     version = models.BigIntegerField()
-    cd_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario')
+    cd_usuario = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario')
     dt_usuario = models.DateTimeField()
     dt_cadastro = models.DateTimeField()
     condicao_domicilio = models.SmallIntegerField(blank=True, null=True)
@@ -72,7 +72,7 @@ class EnderecoDomicilio(models.Model):
     nis_responsavel = models.CharField(max_length=20, blank=True, null=True)
     cd_eqp_micro_area = models.ForeignKey('EquipeMicroArea', models.DO_NOTHING, db_column='cd_eqp_micro_area', blank=True, null=True)
     version_all = models.BigIntegerField(unique=True)
-    cd_usu_cadsus_nis = models.ForeignKey('UsuarioCadsus', models.DO_NOTHING, db_column='cd_usu_cadsus_nis', blank=True, null=True)
+    cd_usu_cadsus_nis = models.ForeignKey('pacientes.UsuarioCadsus', models.DO_NOTHING, db_column='cd_usu_cadsus_nis', blank=True, null=True)
     uuid_tablet = models.CharField(blank=True, null=True)
     score_estratificacao = models.BigIntegerField(blank=True, null=True)
     flag_bpc = models.CharField(max_length=1, blank=True, null=True)
@@ -104,7 +104,7 @@ class EnderecoUsuarioCadsus(models.Model):
     dt_alteracao = models.DateTimeField(blank=True, null=True)
     version = models.BigIntegerField()
     ponto_referencia = models.CharField(max_length=100, blank=True, null=True)
-    empresa = models.ForeignKey('Empresa', models.DO_NOTHING, db_column='empresa', blank=True, null=True)
+    empresa = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa', blank=True, null=True)
     version_all = models.BigIntegerField(unique=True)
     nr_telefone_referencia = models.CharField(max_length=15, blank=True, null=True)
     keyword = models.CharField(blank=True, null=True)
@@ -144,35 +144,18 @@ class Estado(models.Model):
         managed = False
         db_table = 'estado'
 
-class Usuarios(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'usuarios'
-
-class Profissional(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'profissional'
 
 class EquipeMicroArea(models.Model):
     class Meta: 
         managed = False
         db_table = 'equipe_micro_area'
 
-class UsuarioCadsus(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'usuario_cadsus'
 
 class TipoLogradouroCadsus(models.Model):
     class Meta: 
         managed = False
         db_table = 'tipo_logradouro_cadsus'
 
-class Empresa(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'empresa'
 
 class EnderecoEstruturado(models.Model):
     class Meta: 
