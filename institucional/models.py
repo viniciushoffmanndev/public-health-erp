@@ -138,7 +138,7 @@ class Empresa(models.Model):
     cd_tp_unidade = models.IntegerField(blank=True, null=True)
     referencia = models.CharField(unique=True, max_length=10, blank=True, null=True)
     version = models.BigIntegerField()
-    cd_conta_padrao = models.ForeignKey('Conta', models.DO_NOTHING, db_column='cd_conta_padrao', blank=True, null=True)
+    cd_conta_padrao = models.ForeignKey('faturamento.Conta', models.DO_NOTHING, db_column='cd_conta_padrao', blank=True, null=True)
     optante_simples = models.CharField(max_length=1, blank=True, null=True)
     numero_pis_pasep = models.CharField(max_length=11, blank=True, null=True)
     caminho_imagem_padrao = models.CharField(blank=True, null=True)
@@ -166,10 +166,10 @@ class Empresa(models.Model):
     dt_bloqueio_ini = models.DateField(blank=True, null=True)
     dt_bloqueio_fim = models.DateField(blank=True, null=True)
     flag_cancelamento_guia = models.SmallIntegerField(blank=True, null=True)
-    cd_end_estruturado_distrito = models.ForeignKey('EndEstruturadoDistrito', models.DO_NOTHING, db_column='cd_end_estruturado_distrito', blank=True, null=True)
+    cd_end_estruturado_distrito = models.ForeignKey('geografia.EndEstruturadoDistrito', models.DO_NOTHING, db_column='cd_end_estruturado_distrito', blank=True, null=True)
     id_integracao_terceiro = models.BigIntegerField(blank=True, null=True)
     nm_integracao_terceiro = models.CharField(blank=True, null=True)
-    cd_usuario_responsavel = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario_responsavel', blank=True, null=True)
+    cd_usuario_responsavel = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario_responsavel', blank=True, null=True)
     flag_gera_producao_vacinal_esus = models.SmallIntegerField(blank=True, null=True)
     version_all = models.BigIntegerField(blank=True, null=True)
     flag_visualiza_agenda_outras_unidades = models.SmallIntegerField(blank=True, null=True)
@@ -240,12 +240,12 @@ class EstabelecimentoCerest(models.Model):
     complemento = models.CharField(max_length=100, blank=True, null=True)
     cep = models.CharField(max_length=10, blank=True, null=True)
     cod_cid = models.ForeignKey('geografia.Cidade', models.DO_NOTHING, db_column='cod_cid', blank=True, null=True)
-    cod_est = models.ForeignKey('Estado', models.DO_NOTHING, db_column='cod_est', blank=True, null=True)
+    cod_est = models.ForeignKey('geografia.Estado', models.DO_NOTHING, db_column='cod_est', blank=True, null=True)
     situacao = models.SmallIntegerField()
     dt_cadastro = models.DateTimeField()
-    cd_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario')
+    cd_usuario = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario')
     dt_cancelamento = models.DateTimeField(blank=True, null=True)
-    cd_usuario_can = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='cd_usuario_can', related_name='estabelecimentocerest_cd_usuario_can_set', blank=True, null=True)
+    cd_usuario_can = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario_can', related_name='estabelecimentocerest_cd_usuario_can_set', blank=True, null=True)
     version = models.BigIntegerField()
 
     class Meta:
@@ -287,29 +287,3 @@ class Modulo(models.Model):
 
     def __str__(self):
         return self.nm_modulo
-
-
-# =====================================================================
-# STUBS TEMPORÁRIOS PARA ESTE APP
-# =====================================================================
-class Conta(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'conta'
-
-class EndEstruturadoDistrito(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'end_estruturado_distrito'
-
-class Usuarios(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'usuarios'
-
-
-
-class Estado(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'estado'
