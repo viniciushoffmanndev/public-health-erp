@@ -51,7 +51,7 @@ class Profissional(models.Model):
     cd_con_classe = models.ForeignKey('OrgaoEmissor', models.DO_NOTHING, db_column='cd_con_classe', related_name='profissional_cd_con_classe_set', blank=True, null=True)
     flag_nao_possui_cns = models.SmallIntegerField(blank=True, null=True)
     version_all = models.BigIntegerField(unique=True)
-    cd_tipo_prestador_ipe = models.ForeignKey('TipoPrestadorIpe', models.DO_NOTHING, db_column='cd_tipo_prestador_ipe', blank=True, null=True)
+    cd_tipo_prestador_ipe = models.ForeignKey('institucional.TipoPrestadorIpe', models.DO_NOTHING, db_column='cd_tipo_prestador_ipe', blank=True, null=True)
     uf_conselho_reg = models.CharField(max_length=2, blank=True, null=True)
     chave_biometria = models.TextField(blank=True, null=True)
     cd_cnes_processo = models.ForeignKey('CnesProcesso', models.DO_NOTHING, db_column='cd_cnes_processo', blank=True, null=True)
@@ -153,11 +153,6 @@ class Usuarios(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class TipoPrestadorIpe(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'tipo_prestador_ipe'
-
 class CnesProcesso(models.Model):
     class Meta:
         managed = False
