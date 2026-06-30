@@ -2,6 +2,42 @@ from django.db import models
 import uuid6
 
 
+class Estado(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'estado'
+
+    def __str__(self):
+        return f"Estado {self.pk}"
+
+
+class TipoLogradouroCadsus(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'tipo_logradouro_cadsus'
+
+    def __str__(self):
+        return f"Tipo Logradouro CADSUS {self.pk}"
+
+
+class EnderecoEstruturado(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'endereco_estruturado'
+
+    def __str__(self):
+        return f"Endereço Estruturado {self.pk}"
+    
+    
+class EquipeMicroArea(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'equipe_micro_area'
+
+    def __str__(self):
+        return f"Microárea {self.pk}"
+
+
 class Cidade(models.Model):
     cod_cid = models.BigIntegerField(primary_key=True)
     public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
@@ -134,30 +170,3 @@ class TipoLogradouroCnes(models.Model):
 
     def __str__(self):
         return self.ds_tipo_logradouro or self.cd_tipo_logradouro
-
-
-# =====================================================================
-# STUBS TEMPORÁRIOS PARA ESTE APP
-# =====================================================================
-class Estado(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'estado'
-
-
-class EquipeMicroArea(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'equipe_micro_area'
-
-
-class TipoLogradouroCadsus(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'tipo_logradouro_cadsus'
-
-
-class EnderecoEstruturado(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'endereco_estruturado'
