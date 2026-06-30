@@ -9,7 +9,7 @@ class Profissional(models.Model):
     rua = models.CharField(max_length=60, blank=True, null=True)
     complemento = models.CharField(max_length=60, blank=True, null=True)
     bairro = models.CharField(max_length=60, blank=True, null=True)
-    cod_cid = models.ForeignKey('Cidade', models.DO_NOTHING, db_column='cod_cid', blank=True, null=True)
+    cod_cid = models.ForeignKey('geografia.Cidade', models.DO_NOTHING, db_column='cod_cid', blank=True, null=True)
     numero_rua = models.CharField(max_length=10, blank=True, null=True)
     nm_mae = models.CharField(max_length=60, blank=True, null=True)
     nm_pai = models.CharField(max_length=60, blank=True, null=True)
@@ -24,7 +24,7 @@ class Profissional(models.Model):
     uf_rg = models.CharField(max_length=2, blank=True, null=True)
     cd_cns = models.CharField(max_length=60, blank=True, null=True)
     telefone = models.CharField(max_length=40, blank=True, null=True)
-    cod_cid_nasc = models.ForeignKey('Cidade', models.DO_NOTHING, db_column='cod_cid_nasc', related_name='profissional_cod_cid_nasc_set', blank=True, null=True)
+    cod_cid_nasc = models.ForeignKey('geografia.Cidade', models.DO_NOTHING, db_column='cod_cid_nasc', related_name='profissional_cod_cid_nasc_set', blank=True, null=True)
     dt_atualizacao = models.DateTimeField(blank=True, null=True)
     profissional_id_cnes = models.CharField(max_length=16, blank=True, null=True)
     ativo = models.CharField(max_length=1, blank=True, null=True)
@@ -143,11 +143,6 @@ class Usuarios(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP (Até fazermos o inspectdb delas)
 # =====================================================================
-class Cidade(models.Model):
-    class Meta:
-        managed = False
-        db_table = 'cidade'
-
 class TipoLogradouroCnes(models.Model):
     class Meta:
         managed = False
