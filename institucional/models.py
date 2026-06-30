@@ -2,6 +2,15 @@ from django.db import models
 import uuid6
 
 
+class TipoPrestadorIpe(models.Model):
+    class Meta: 
+        managed = False
+        db_table = 'tipo_prestador_ipe'
+    
+    def __str__(self):
+        return f"Tipo Prestador IPE {self.pk}"
+
+
 class Empresa(models.Model):
     empresa = models.IntegerField(primary_key=True)
     public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
@@ -246,10 +255,6 @@ class Conta(models.Model):
         managed = False
         db_table = 'conta'
 
-class TipoPrestadorIpe(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'tipo_prestador_ipe'
 
 class CnesProcesso(models.Model):
     class Meta: 
