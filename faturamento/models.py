@@ -83,7 +83,7 @@ class Convenio(models.Model):
     endereco = models.CharField(max_length=200, blank=True, null=True)
     telefone = models.CharField(max_length=11, blank=True, null=True)
     telefone2 = models.CharField(max_length=11, blank=True, null=True)
-    cidade = models.ForeignKey('Cidade', models.DO_NOTHING, db_column='cidade', blank=True, null=True)
+    cidade = models.ForeignKey('geografia.Cidade', models.DO_NOTHING, db_column='cidade', blank=True, null=True)
     subconvenio = models.SmallIntegerField()
     validacao_nr_convenio = models.SmallIntegerField(blank=True, null=True)
     flag_nr_convenio_obrigatorio = models.SmallIntegerField(blank=True, null=True)
@@ -125,11 +125,6 @@ class TipoProcedimentoAtendimento(models.Model):
 # =====================================================================
 # STUBS TEMPORÁRIOS PARA ESTE APP
 # =====================================================================
-class Cidade(models.Model):
-    class Meta: 
-        managed = False
-        db_table = 'cidade'
-
 class TipoTabelaProcedimento(models.Model):
     class Meta: 
         managed = False
