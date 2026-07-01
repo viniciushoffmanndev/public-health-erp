@@ -28,7 +28,7 @@ class UsuariosAdmin(admin.ModelAdmin):
 
 @admin.register(OrgaoEmissor)
 class OrgaoEmissorAdmin(admin.ModelAdmin):
-    list_display = ('cd_orgao_emissor', 'sg_orgao_emissor', 'ds_orgao_emissor', 'fl_saude')
+    list_display = ('cd_orgao_emissor', 'sg_orgao_emissor', 'ds_orgao_emissor', 'fl_saude', 'get_db_table')
     search_fields = ('sg_orgao_emissor', 'ds_orgao_emissor', 'cd_orgao_emissor')
     ordering = ('sg_orgao_emissor',)
     
