@@ -94,11 +94,11 @@ class Microrregiao(models.Model):
 
 
 class Empresa(models.Model):
-    empresa = models.IntegerField(primary_key=True)
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
-    descricao = models.CharField(max_length=60)
+    empresa = models.IntegerField(primary_key=True, db_column='empresa')
+   # public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
+    descricao = models.CharField(max_length=255, blank=True, null=True)
     cod_atv = models.ForeignKey('pacientes.Atividade', models.DO_NOTHING, db_column='cod_atv', blank=True, null=True)
-    fantasia = models.CharField(max_length=60, blank=True, null=True)
+    fantasia = models.CharField(max_length=255, blank=True, null=True)
     rua = models.CharField(max_length=60, blank=True, null=True)
     bairro = models.CharField(max_length=60, blank=True, null=True)
     telefone = models.CharField(max_length=20, blank=True, null=True)
@@ -184,7 +184,9 @@ class Empresa(models.Model):
         db_table_comment = 'Tabela de Empresas'
 
     def __str__(self):
-        return f"{self.empresa} - {self.fantasia or self.descricao}"
+        if self.fantasia:
+            return self.fantasia
+        return self.descricao if self.descricao else f"Unidade/Empresa {self.pk}"
 
 
 class Equipe(models.Model):
