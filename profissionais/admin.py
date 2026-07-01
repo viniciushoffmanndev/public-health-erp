@@ -48,5 +48,11 @@ class TabelaCboGrupoAtendimentoAdmin(admin.ModelAdmin):
 
 @admin.register(ProgramaWeb)
 class ProgramaWebAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'get_db_table')
-    def get_db_table(self, obj): return obj._meta.db_table
+    list_display = ('cd_prg_web', 'ds_prg_web', 'ativo', 'get_db_table')
+    search_fields = ('ds_prg_web', 'cd_prg_web')
+    list_filter = ('ativo',)
+    ordering = ('ds_prg_web',)
+
+    @admin.display(description='Tabela Física')
+    def get_db_table(self, obj):
+        return obj._meta.db_table
