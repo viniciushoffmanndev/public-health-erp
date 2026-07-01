@@ -15,15 +15,27 @@ class Estado(models.Model):
 
 
 class TipoLogradouroCadsus(models.Model):
+
+    cd_tipo_logradouro = models.IntegerField(primary_key=True, db_column='cd_tipo_logradouro')
+    ds_tipo_logradouro = models.CharField(max_length=100, db_column='ds_tipo_logradouro', blank=True, null=True)
+    ds_sigla_logradouro = models.CharField(max_length=10, db_column='ds_sigla_logradouro', blank=True, null=True)
+    version = models.BigIntegerField()
+    version_all = models.BigIntegerField()
+
     class Meta: 
         managed = False
         db_table = 'tipo_logradouro_cadsus'
 
     def __str__(self):
-        return f"Tipo Logradouro CADSUS {self.pk}"
+        return self.ds_tipo_logradouro if self.ds_tipo_logradouro else f"Tipo Logradouro CADSUS {self.pk}"
 
 
 class EnderecoEstruturado(models.Model):
+
+    cd_endereco_estruturado = models.BigIntegerField(primary_key=True, db_column='cd_endereco_estruturado')
+    cd_end_estruturado_distrito = models.ForeignKey('EndEstruturadoDistrito', models.DO_NOTHING, db_column='cd_end_estruturado_distrito', blank=True, null=True)
+    version = models.BigIntegerField()
+
     class Meta: 
         managed = False
         db_table = 'endereco_estruturado'
@@ -49,7 +61,7 @@ class EndEstruturadoDistrito(models.Model):
     class Meta:
         managed = False
         db_table = 'end_estruturado_distrito'
-    # O método __str__ está exibindo o nome real do distrito!
+    
     def __str__(self):
         return self.descricao if self.descricao else f"Distrito {self.pk}"
 
@@ -139,7 +151,6 @@ class EnderecoDomicilio(models.Model):
 
 class EnderecoUsuarioCadsus(models.Model):
     cd_endereco = models.BigIntegerField(primary_key=True)
-   #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     cd_tipo_logradouro = models.ForeignKey('TipoLogradouroCadsus', models.DO_NOTHING, db_column='cd_tipo_logradouro', blank=True, null=True)
     nm_logradouro = models.CharField(max_length=50)
     nr_logradouro = models.CharField(max_length=7, blank=True, null=True)
