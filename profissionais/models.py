@@ -1,5 +1,4 @@
 from django.db import models
-import uuid6
 
 
 class OrgaoEmissor(models.Model):
@@ -39,9 +38,8 @@ class ProgramaWeb(models.Model):
 
 
 class Profissional(models.Model):
-    cd_profissional = models.IntegerField(primary_key=True)
-    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
-    nm_profissional = models.CharField(max_length=60)
+    cd_profissional = models.IntegerField(primary_key=True, db_column='cd_profissional')
+    nm_profissional = models.CharField(max_length=60, db_column='nm_profissional')
     cpf = models.CharField(max_length=14, blank=True, null=True)
     rua = models.CharField(max_length=60, blank=True, null=True)
     complemento = models.CharField(max_length=60, blank=True, null=True)
@@ -55,7 +53,8 @@ class Profissional(models.Model):
     tp_sus_nao_sus = models.CharField(max_length=1, blank=True, null=True)
     cd_tipo_logradouro = models.ForeignKey('geografia.TipoLogradouroCnes', models.DO_NOTHING, db_column='cd_tipo_logradouro', blank=True, null=True)
     cep = models.CharField(max_length=8, blank=True, null=True)
-    cd_orgao_emissor = models.ForeignKey('OrgaoEmissor', models.DO_NOTHING, db_column='cd_orgao_emissor', blank=True, null=True)
+    cd_orgao_emissor = models.SmallIntegerField(db_column='cd_orgao_emissor', blank=True, null=True)
+    cd_con_classe = models.SmallIntegerField(db_column='cd_con_classe', blank=True, null=True)
     nr_rg = models.CharField(max_length=15, blank=True, null=True)
     dt_emissao_rg = models.DateField(blank=True, null=True)
     uf_rg = models.CharField(max_length=2, blank=True, null=True)
@@ -73,9 +72,7 @@ class Profissional(models.Model):
     tipo = models.CharField(max_length=1, blank=True, null=True)
     erro_importacao = models.TextField(blank=True, null=True)
     referencia = models.CharField(unique=True, max_length=10, blank=True, null=True)
-    version = models.BigIntegerField()
     observacao = models.CharField(max_length=250, blank=True, null=True)
-    cd_con_classe = models.ForeignKey('OrgaoEmissor', models.DO_NOTHING, db_column='cd_con_classe', related_name='profissional_cd_con_classe_set', blank=True, null=True)
     flag_nao_possui_cns = models.SmallIntegerField(blank=True, null=True)
     version_all = models.BigIntegerField(unique=True)
     cd_tipo_prestador_ipe = models.ForeignKey('institucional.TipoPrestadorIpe', models.DO_NOTHING, db_column='cd_tipo_prestador_ipe', blank=True, null=True)
@@ -89,6 +86,7 @@ class Profissional(models.Model):
     email = models.CharField(max_length=100, blank=True, null=True)
     vinculo = models.SmallIntegerField(blank=True, null=True)
     cargo = models.CharField(blank=True, null=True)
+    version = models.BigIntegerField()
 
     class Meta:
         managed = False
@@ -99,17 +97,16 @@ class Profissional(models.Model):
 
 
 class TabelaCbo(models.Model):
-    cd_cbo = models.CharField(primary_key=True, max_length=10)
-    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
-    ds_cbo = models.CharField(max_length=150)
+    cd_cbo = models.CharField(primary_key=True, max_length=10, db_column='cd_cbo')
+    ds_cbo = models.CharField(max_length=150, db_column='ds_cbo')
     cd_grupo_cbo = models.ForeignKey('TabelaSubgrupoCbo', models.DO_NOTHING, db_column='cd_grupo_cbo', blank=True, null=True)
     cd_subgrupo_cbo = models.SmallIntegerField(blank=True, null=True)
-    version = models.BigIntegerField()
     cd_cbo_grupo_atend = models.ForeignKey('TabelaCboGrupoAtendimento', models.DO_NOTHING, db_column='cd_cbo_grupo_atend', blank=True, null=True)
-    version_all = models.BigIntegerField(unique=True)
     nivel_ensino = models.SmallIntegerField(blank=True, null=True)
     ativo = models.SmallIntegerField()
     tipo_profissional_saude = models.SmallIntegerField(blank=True, null=True)
+    version = models.BigIntegerField()
+    version_all = models.BigIntegerField(unique=True)
 
     class Meta:
         managed = False
@@ -120,16 +117,15 @@ class TabelaCbo(models.Model):
 
 
 class Usuarios(models.Model):
-    cd_usuario = models.DecimalField(primary_key=True, max_digits=6, decimal_places=0)
-    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
+    cd_usuario = models.DecimalField(primary_key=True, max_digits=6, decimal_places=0, db_column='cd_usuario')
     cd_modulo = models.ForeignKey('institucional.Modulo', models.DO_NOTHING, db_column='cd_modulo', blank=True, null=True)
-    ds_login = models.CharField(unique=True, max_length=100)
-    nm_usuario = models.CharField(max_length=50)
+    ds_login = models.CharField(unique=True, max_length=100, db_column='ds_login')
+    nm_usuario = models.CharField(max_length=50, db_column='nm_usuario')
     dt_criacao = models.DateField()
     ds_status = models.CharField(max_length=1)
     senha = models.CharField()
     ds_nivel = models.CharField(max_length=1)
-    navegador_padrao = models.CharField(max_length=200, blank=True, null=True, db_comment='Qual o navegador de paginas que o usuario utiliza.')
+    navegador_padrao = models.CharField(max_length=200, blank=True, null=True)
     dir_temp = models.CharField(max_length=50, blank=True, null=True)
     empresa_padrao = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa_padrao', blank=True, null=True)
     ds_email = models.CharField(max_length=100, blank=True, null=True)
@@ -139,14 +135,12 @@ class Usuarios(models.Model):
     tempo_sessao = models.IntegerField(blank=True, null=True)
     dt_ult_acesso = models.DateTimeField(blank=True, null=True)
     qt_acesso = models.SmallIntegerField(blank=True, null=True)
-    version = models.BigIntegerField()
     identificador = models.CharField(unique=True, blank=True, null=True)
     flag_identificavel = models.CharField(max_length=1, blank=True, null=True)
     cd_usuario_cad = models.ForeignKey('self', models.DO_NOTHING, db_column='cd_usuario_cad')
     flag_usu_temporario = models.SmallIntegerField()
     data_registro = models.DateTimeField(blank=True, null=True)
     dias_expirar_senha = models.SmallIntegerField(blank=True, null=True)
-    version_all = models.BigIntegerField(unique=True)
     tp_usuario = models.SmallIntegerField()
     flag_receber_email_msg_interna = models.CharField(max_length=1, blank=True, null=True)
     cpf = models.CharField(max_length=11, blank=True, null=True)
@@ -168,6 +162,8 @@ class Usuarios(models.Model):
     data_termo_fru = models.DateTimeField(blank=True, null=True)
     tp_certificado = models.IntegerField(blank=True, null=True)
     provedor_certificado = models.IntegerField(blank=True, null=True)
+    version = models.BigIntegerField()
+    version_all = models.BigIntegerField(unique=True)
 
     class Meta:
         managed = False
