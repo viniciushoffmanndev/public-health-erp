@@ -41,9 +41,9 @@ class TabelaCboGrupoAtendimento(models.Model):
 
 class ProgramaWeb(models.Model):
     cd_prg_web = models.IntegerField(primary_key=True, db_column='cd_prg_web')
-    ds_prg_web = models.CharField(max_length=150, db_column='ds_prg_web', blank=True, null=True)
-    cd_prg_pag_principal = models.IntegerField(db_column='cd_prg_pag_principal', blank=True, null=True)
-    ativo = models.CharField(max_length=1, db_column='ativo', blank=True, null=True)
+    ds_prg_web = models.CharField(max_length=255, db_column='ds_prg_web') 
+    cd_prg_pag_principal = models.IntegerField(db_column='cd_prg_pag_principal')
+    ativo = models.CharField(max_length=1, db_column='ativo')
     version = models.BigIntegerField()
 
     class Meta:
