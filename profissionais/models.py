@@ -40,12 +40,18 @@ class TabelaCboGrupoAtendimento(models.Model):
     
 
 class ProgramaWeb(models.Model):
+    cd_prg_web = models.IntegerField(primary_key=True, db_column='cd_prg_web')
+    ds_prg_web = models.CharField(max_length=150, db_column='ds_prg_web', blank=True, null=True)
+    cd_prg_pag_principal = models.IntegerField(db_column='cd_prg_pag_principal', blank=True, null=True)
+    ativo = models.CharField(max_length=1, db_column='ativo', blank=True, null=True)
+    version = models.BigIntegerField()
+
     class Meta:
         managed = False
         db_table = 'programa_web'
 
     def __str__(self):
-        return f"Programa Web {self.pk}"
+        return self.ds_prg_web if self.ds_prg_web else f"Programa Web {self.pk}"
 
 
 class Profissional(models.Model):
