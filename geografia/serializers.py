@@ -4,18 +4,17 @@ from .models import Cidade, Estado
 class EstadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estado
-        fields = ['public_id']  # Usando o public_id (UUIDv7) que está mapeado no seu modelo
+        fields = ['cod_est']  # Usando a PK real numérica do banco legado
 
 
 class CidadeSerializer(serializers.ModelSerializer):
-    # Retorna o UUID público do estado em vez do código interno do banco
-    estado_id = serializers.UUIDField(source='cod_est.public_id', read_only=True)
+    # Retorna diretamente o código numérico do estado relacionado
+    estado_id = serializers.IntegerField(source='cod_est.cod_est', read_only=True)
 
     class Meta:
         model = Cidade
         fields = [
             'cod_cid', 
-            'public_id', 
             'descricao', 
             'estado_id', 
             'cd_esus', 
