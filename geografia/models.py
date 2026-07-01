@@ -42,12 +42,16 @@ class EquipeMicroArea(models.Model):
     
 
 class EndEstruturadoDistrito(models.Model):
+    # Define a Pk real e mepeia o campo de descrição do distrito
+    cd_end_estruturado_distrito = models.BigIntegerField(primary_key=True, db_column='cd_end_estruturado_distrito')
+    descricao = models.CharField(max_length=255, blank=True, null=True)
+
     class Meta:
         managed = False
         db_table = 'end_estruturado_distrito'
-
+    # O método __str__ está exibindo o nome real do distrito!
     def __str__(self):
-        return f"Distrito Estruturado {self.pk}"
+        return self.descricao if self.descricao else f"Distrito {self.pk}"
 
 
 class Cidade(models.Model):
@@ -71,7 +75,7 @@ class Cidade(models.Model):
 
 class EnderecoDomicilio(models.Model):
     cd_domicilio = models.BigIntegerField(primary_key=True)
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
+    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     cd_cadastrador = models.IntegerField(blank=True, null=True)
     nr_ficha = models.IntegerField(blank=True, null=True)
     nr_domicilio = models.CharField(max_length=16, blank=True, null=True)
@@ -135,7 +139,7 @@ class EnderecoDomicilio(models.Model):
 
 class EnderecoUsuarioCadsus(models.Model):
     cd_endereco = models.BigIntegerField(primary_key=True)
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
+   #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     cd_tipo_logradouro = models.ForeignKey('TipoLogradouroCadsus', models.DO_NOTHING, db_column='cd_tipo_logradouro', blank=True, null=True)
     nm_logradouro = models.CharField(max_length=50)
     nr_logradouro = models.CharField(max_length=7, blank=True, null=True)
@@ -171,7 +175,7 @@ class EnderecoUsuarioCadsus(models.Model):
 
 class TipoLogradouroCnes(models.Model):
     cd_tipo_logradouro = models.CharField(primary_key=True, max_length=3)
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
+    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     ds_tipo_logradouro = models.CharField(max_length=60, blank=True, null=True)
     version = models.BigIntegerField()
 
