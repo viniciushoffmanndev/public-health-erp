@@ -28,8 +28,13 @@ class UsuariosAdmin(admin.ModelAdmin):
 
 @admin.register(OrgaoEmissor)
 class OrgaoEmissorAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'get_db_table')
-    def get_db_table(self, obj): return obj._meta.db_table
+    list_display = ('cd_orgao_emissor', 'sg_orgao_emissor', 'ds_orgao_emissor', 'fl_saude')
+    search_fields = ('sg_orgao_emissor', 'ds_orgao_emissor', 'cd_orgao_emissor')
+    ordering = ('sg_orgao_emissor',)
+    
+    @admin.display(description='Tabela Física')
+    def get_db_table(self, obj): 
+        return obj._meta.db_table
 
 @admin.register(TabelaSubgrupoCbo)
 class TabelaSubgrupoCboAdmin(admin.ModelAdmin):
