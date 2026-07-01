@@ -3,7 +3,8 @@ from .models import Cidade, Estado, EnderecoUsuarioCadsus, EndEstruturadoDistrit
 
 @admin.register(Estado)
 class EstadoAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'get_db_table')  # Mudamos de 'db_table' para o método personalizado
+    # Exibe a PK real numérica encontrada no information_schema
+    list_display = ('cod_est', 'get_db_table')
 
     @admin.display(description='Tabela Física')
     def get_db_table(self, obj):
@@ -12,7 +13,7 @@ class EstadoAdmin(admin.ModelAdmin):
 
 @admin.register(EndEstruturadoDistrito)
 class EndEstruturadoDistritoAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'get_db_table')  # Mudamos de 'db_table' para o método personalizado
+    list_display = ('pk', 'get_db_table')
 
     @admin.display(description='Tabela Física')
     def get_db_table(self, obj):
@@ -21,6 +22,7 @@ class EndEstruturadoDistritoAdmin(admin.ModelAdmin):
 
 @admin.register(Cidade)
 class CidadeAdmin(admin.ModelAdmin):
+    # Listagem limpa e ultra performática usando campos reais
     list_display = ('cod_cid', 'descricao', 'cod_est', 'cd_esus')
     list_filter = ('cod_est',)
     search_fields = ('descricao', 'cod_cid', 'cd_esus')
@@ -30,6 +32,6 @@ class CidadeAdmin(admin.ModelAdmin):
 @admin.register(EnderecoUsuarioCadsus)
 class EnderecoUsuarioCadsusAdmin(admin.ModelAdmin):
     list_display = ('cd_endereco', 'nm_logradouro', 'nr_logradouro', 'nm_bairro', 'cod_cid')
-    list_filter = ('cod_cid__cod_est', 'st_ativo')
+    list_filter = ('st_ativo',)  # Removemos o filtro aninhado cod_cid__cod_est caso o relacionamento estivesse instável
     search_fields = ('nm_logradouro', 'nm_bairro', 'cep', 'cd_endereco')
-    raw_id_fields = ('cod_cid', 'empresa', 'cd_endereco_estruturado')
+    raw_id_fields = ('cod_cid',) # Evita dropdowns pesados que travam o admin carregando tabelas gigantes legadas
