@@ -2,12 +2,23 @@ from django.db import models
 
 
 class OrgaoEmissor(models.Model):
+    cd_orgao_emissor = models.SmallIntegerField(primary_key=True, db_column='cd_orgao_emissor')
+    ds_orgao_emissor = models.CharField(max_length=60, db_column='ds_orgao_emissor', blank=True, null=True)
+    sg_orgao_emissor = models.CharField(max_length=10, db_column='sg_orgao_emissor', blank=True, null=True)
+    fl_saude = models.CharField(max_length=1, db_column='fl_saude', blank=True, null=True)
+    cod_conselho_tiss = models.IntegerField(db_column='cod_conselho_tiss', blank=True, null=True)
+    oid = models.CharField(max_length=50, db_column='oid', blank=True, null=True)
+    version = models.BigIntegerField()
+    version_all = models.BigIntegerField(unique=True)
+
     class Meta:
         managed = False
         db_table = 'orgao_emissor'
 
     def __str__(self):
-        return f"Órgão emissor {self.pk}"
+        if self.sg_orgao_emissor and self.ds_orgao_emissor:
+            return f"{self.sg_orgao_emissor} - {self.ds_orgao_emissor}"
+        return self.sg_orgao_emissor if self.sg_orgao_emissor else f"Órgão {self.pk}"
     
 
 class TabelaSubgrupoCbo(models.Model):
