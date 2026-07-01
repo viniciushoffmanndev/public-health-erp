@@ -36,6 +36,15 @@ class EquipeMicroArea(models.Model):
 
     def __str__(self):
         return f"Microárea {self.pk}"
+    
+
+class EndEstruturadoDistrito(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'end_estruturado_distrito'
+
+    def __str__(self):
+        return f"Distrito Estruturado {self.pk}"
 
 
 class Cidade(models.Model):
