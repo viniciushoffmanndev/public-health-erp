@@ -52,7 +52,7 @@ class EndEstruturadoDistrito(models.Model):
 
 class Cidade(models.Model):
     cod_cid = models.BigIntegerField(primary_key=True)
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
+    #public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     descricao = models.CharField(max_length=50)
     cod_est = models.ForeignKey('Estado', models.DO_NOTHING, db_column='cod_est', to_field='cod_est')
     version = models.BigIntegerField()
