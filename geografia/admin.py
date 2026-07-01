@@ -13,7 +13,8 @@ class EstadoAdmin(admin.ModelAdmin):
 
 @admin.register(EndEstruturadoDistrito)
 class EndEstruturadoDistritoAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'get_db_table')
+    list_display = ('cd_end_estruturado_distrito', 'descricao', 'get_db_table')
+    search_fields = ('descricao', 'cd_end_estruturado_distrito')
 
     @admin.display(description='Tabela Física')
     def get_db_table(self, obj):
