@@ -56,9 +56,18 @@ class GerenciadorArquivo(models.Model):
             return f"Gerenciador de Arquivo {self.pk}"
 
 
+class Conta(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'conta'
+
+    def __str__(self):
+        return f"Conta {self.pk}"
+
+
 class ProcedimentoCompetencia(models.Model):
     public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
-    cd_procedimento = models.ForeignKey('Procedimento', models.DO_NOTHING, db_column='cd_procedimento', primary_key=True)
+    cd_procedimento = models.OneToOneField('Procedimento', models.DO_NOTHING, db_column='cd_procedimento')
     dt_competencia = models.DateField()
     cd_financiamento = models.ForeignKey('ProcedimentoFinanciamento', models.DO_NOTHING, db_column='cd_financiamento', blank=True, null=True)
     cd_rubrica = models.ForeignKey('ProcedimentoRubrica', models.DO_NOTHING, db_column='cd_rubrica', blank=True, null=True)
