@@ -269,7 +269,7 @@ class UsuarioCadsus(models.Model):
 
 
 class UsuarioCadsusHistorico(models.Model):
-    cd_usu_cadsus = models.ForeignKey(UsuarioCadsus, models.DO_NOTHING, db_column='cd_usu_cadsus', primary_key=True)
+    cd_usu_cadsus = models.OneToOneField('UsuarioCadsus', models.DO_NOTHING, db_column='cd_usu_cadsus')
     dt_alteracao = models.DateTimeField()
     empresa = models.ForeignKey('institucional.Empresa', models.DO_NOTHING, db_column='empresa')
     cd_usuario = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario')
