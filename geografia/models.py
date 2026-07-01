@@ -3,6 +3,9 @@ import uuid6
 
 
 class Estado(models.Model):
+
+    cod_est = models.IntegerField(primary_key=True, db_column='cod_est')
+
     class Meta: 
         managed = False
         db_table = 'estado'
@@ -51,7 +54,7 @@ class Cidade(models.Model):
     cod_cid = models.BigIntegerField(primary_key=True)
     public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     descricao = models.CharField(max_length=50)
-    cod_est = models.ForeignKey('Estado', models.DO_NOTHING, db_column='cod_est')
+    cod_est = models.ForeignKey('Estado', models.DO_NOTHING, db_column='cod_est', to_field='cod_est')
     version = models.BigIntegerField()
     version_all = models.BigIntegerField(unique=True)
     cd_esus = models.BigIntegerField(blank=True, null=True)
