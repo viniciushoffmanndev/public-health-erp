@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib import admin
 from .models import (Profissional, TabelaCbo, Usuarios, OrgaoEmissor, TabelaSubgrupoCbo, TabelaCboGrupoAtendimento, ProgramaWeb)
 
 @admin.register(Profissional)
