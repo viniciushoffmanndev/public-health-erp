@@ -39,12 +39,19 @@ class Nacionalidade(models.Model):
 
 
 class Raca(models.Model): 
+    cd_raca = models.SmallIntegerField(primary_key=True, db_column='cd_raca')
+    ds_raca = models.CharField(max_length=30, db_column='ds_raca')  # Alterado cirurgicamente para 30!
+    version = models.BigIntegerField(db_column='version')
+    version_all = models.BigIntegerField(db_column='version_all')
+
     class Meta: 
-        managed=False
-        db_table='raca'
+        managed = False
+        db_table = 'raca'
+        verbose_name = 'Raça / Cor'
+        verbose_name_plural = 'Raças / Cores'
 
     def __str__(self):
-        return f"Raça {self.pk}"
+        return f"{self.cd_raca} - {self.ds_raca}"
 
 
 class EstadoCivil(models.Model):
