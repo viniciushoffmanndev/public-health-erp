@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from .models import UsuarioCadsus, Pessoa
+from .models import UsuarioCadsus, Pessoa, Nacionalidade
 
 @admin.register(UsuarioCadsus)
 class UsuarioCadsusAdmin(admin.ModelAdmin):
@@ -33,3 +33,14 @@ class PessoaAdmin(admin.ModelAdmin):
     
     # Protege a memória contra dropdowns pesados nas chaves estrangeiras
     raw_id_fields = ('cod_atv', 'cod_tip_pessoa', 'cod_representante')
+
+
+@admin.register(Nacionalidade)
+class NacionalidadeAdmin(admin.ModelAdmin):
+    list_display = ('cd_pais', 'ds_pais', 'cd_pni', 'cd_esus')
+    search_fields = ('ds_pais', 'cd_pais')
+    ordering = ('ds_pais',)
+
+    def has_add_permission(self, request): return False
+    def has_change_permission(self, request, obj=None): return False
+    def has_delete_permission(self, request, obj=None): return False

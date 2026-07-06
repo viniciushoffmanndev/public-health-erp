@@ -21,12 +21,21 @@ class TipoPessoa(models.Model):
 
 
 class Nacionalidade(models.Model): 
+    cd_pais = models.IntegerField(primary_key=True, db_column='cd_pais')
+    ds_pais = models.CharField(max_length=150, db_column='ds_pais')
+    version = models.BigIntegerField(db_column='version')
+    version_all = models.BigIntegerField(db_column='version_all')
+    cd_pni = models.IntegerField(blank=True, null=True, db_column='cd_pni')
+    cd_esus = models.BigIntegerField(blank=True, null=True, db_column='cd_esus')
+
     class Meta: 
-        managed=False
-        db_table='nacionalidade'
+        managed = False
+        db_table = 'nacionalidade'
+        verbose_name = 'Nacionalidade'
+        verbose_name_plural = 'Nacionalidades'
 
     def __str__(self):
-        return f"Nacionalidade {self.pk}"
+        return f"{self.cd_pais} - {self.ds_pais}"
 
 
 class Raca(models.Model): 
