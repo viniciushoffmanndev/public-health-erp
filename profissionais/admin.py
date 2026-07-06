@@ -11,11 +11,23 @@ class ProfissionalAdmin(admin.ModelAdmin):
 
 @admin.register(TabelaCbo)
 class TabelaCboAdmin(admin.ModelAdmin):
-    list_display = ('cd_cbo', 'ds_cbo', 'ativo', 'nivel_ensino')
-    list_filter = ('ativo', 'nivel_ensino')
+    list_display = ('cd_cbo', 'ds_cbo', 'cd_grupo_cbo', 'cd_subgrupo_cbo', 'ativo')
     search_fields = ('cd_cbo', 'ds_cbo')
+    list_filter = ('ativo', 'tipo_profissional_saude')
     ordering = ('cd_cbo',)
-    raw_id_fields = ('cd_grupo_cbo', 'cd_cbo_grupo_atend')
+    
+    # Remove os links de clique para evitar o disparo do bug de relacionamento composto
+    list_display_links = None 
+
+    # Desativa operações de escrita
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 @admin.register(Usuarios)
 class UsuariosAdmin(admin.ModelAdmin):

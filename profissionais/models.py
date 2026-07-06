@@ -162,20 +162,24 @@ class Profissional(models.Model):
 
 
 class TabelaCbo(models.Model):
-    cd_cbo = models.CharField(primary_key=True, max_length=10, db_column='cd_cbo')
-    ds_cbo = models.CharField(max_length=150, db_column='ds_cbo')
-    cd_grupo_cbo = models.ForeignKey('TabelaSubgrupoCbo', models.DO_NOTHING, db_column='cd_grupo_cbo', blank=True, null=True)
-    cd_subgrupo_cbo = models.SmallIntegerField(blank=True, null=True)
-    cd_cbo_grupo_atend = models.ForeignKey('TabelaCboGrupoAtendimento', models.DO_NOTHING, db_column='cd_cbo_grupo_atend', blank=True, null=True)
-    nivel_ensino = models.SmallIntegerField(blank=True, null=True)
-    ativo = models.SmallIntegerField()
-    tipo_profissional_saude = models.SmallIntegerField(blank=True, null=True)
-    version = models.BigIntegerField()
-    version_all = models.BigIntegerField(unique=True)
+    cd_cbo = models.CharField(db_column='cd_cbo', max_length=10, primary_key=True)
+    ds_cbo = models.CharField(db_column='ds_cbo', max_length=150, blank=False, null=False)
+    # Mantemos como inteiros simples no model para evitar que o Django tente
+    # resolver uma FK composta inexistente e quebre o Admin
+    cd_grupo_cbo = models.SmallIntegerField( db_column='cd_grupo_cbo',  blank=True,  null=True)
+    cd_subgrupo_cbo = models.SmallIntegerField( db_column='cd_subgrupo_cbo',  blank=True,  null=True)
+    version = models.BigIntegerField(db_column='version', default=0, blank=False,  null=False)
+    cd_cbo_grupo_atend = models.BigIntegerField(db_column='cd_cbo_grupo_atend', blank=True, null=True)
+    version_all = models.BigIntegerField(db_column='version_all', blank=False, null=False)
+    nivel_ensino = models.SmallIntegerField(db_column='nivel_ensino', blank=True, null=True)
+    ativo = models.SmallIntegerField(db_column='ativo', default=1, blank=False, null=False)
+    tipo_profissional_saude = models.SmallIntegerField(db_column='tipo_profissional_saude', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'tabela_cbo'
+        verbose_name = 'CBO (Ocupação)'
+        verbose_name_plural = 'CBOs (Ocupações)'
 
     def __str__(self):
         return f"{self.cd_cbo} - {self.ds_cbo}"
