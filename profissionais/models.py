@@ -22,12 +22,37 @@ class OrgaoEmissor(models.Model):
     
 
 class TabelaSubgrupoCbo(models.Model):
+    # Eleito como PK para o Django, com as travas aplicadas no admin.py
+    cd_subgrupo_cbo = models.SmallIntegerField(
+        db_column='cd_subgrupo_cbo', 
+        primary_key=True
+    )
+    # Como o banco diz que é uma FK, no futuro podemos transformar isso em um models.ForeignKey.
+    # Por enquanto, mantemos como o dado bruto para estabilizar o Admin.
+    cd_grupo_cbo = models.SmallIntegerField(
+        db_column='cd_grupo_cbo'
+    )
+    ds_subgrupo_cbo = models.CharField(
+        db_column='ds_subgrupo_cbo', 
+        max_length=200,      # Descoberta cirúrgica: tamanho exato do banco!
+        blank=False,         # Requisito do Aceita Nulo? NO
+        null=False           # Requisito do Aceita Nulo? NO
+    )
+    version = models.BigIntegerField(
+        db_column='version', 
+        default=0,           # Descoberta cirúrgica: Valor Padrão é 0 no banco!
+        blank=False, 
+        null=False
+    )
+
     class Meta:
         managed = False
         db_table = 'tabela_subgrupo_cbo'
+        verbose_name = 'Subgrupo CBO'
+        verbose_name_plural = 'Subgrupos CBO'
 
     def __str__(self):
-        return f"Subgrupo CBO {self.pk}"
+        return f"{self.cd_grupo_cbo}-{self.cd_subgrupo_cbo} | {self.ds_subgrupo_cbo}"
 
 
 class TabelaCboGrupoAtendimento(models.Model):
