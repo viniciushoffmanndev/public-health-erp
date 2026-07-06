@@ -31,12 +31,35 @@ class TabelaSubgrupoCbo(models.Model):
 
 
 class TabelaCboGrupoAtendimento(models.Model):
+    cd_cbo_grupo_atend = models.BigIntegerField(
+        db_column='cd_cbo_grupo_atend', 
+        primary_key=True
+    )
+    descricao = models.CharField(
+        db_column='descricao', 
+        max_length=100,      # Descoberta cirúrgica: limite exato do banco
+        blank=False,         # Obrigatoriedade espelhada do is_nullable: NO
+        null=False           # Obrigatoriedade espelhada do is_nullable: NO
+    )
+    version = models.BigIntegerField(
+        db_column='version', 
+        blank=False,         # Obrigatoriedade espelhada do is_nullable: NO
+        null=False           # Obrigatoriedade espelhada do is_nullable: NO
+    )
+    flag_medico = models.SmallIntegerField(
+        db_column='flag_medico', 
+        blank=True,          # Permitido pelo banco (is_nullable: YES)
+        null=True            # Permitido pelo banco (is_nullable: YES)
+    )
+
     class Meta:
-        managed = False
+        managed = False  # O banco Neon dita as regras estruturais
         db_table = 'tabela_cbo_grupo_atendimento'
+        verbose_name = 'CBO Grupo de Atendimento'
+        verbose_name_plural = 'CBO Grupos de Atendimento'
 
     def __str__(self):
-        return f"Grupo Atendimento CBO {self.pk}"
+        return f"{self.cd_cbo_grupo_atend} - {self.descricao}"
     
 
 class ProgramaWeb(models.Model):
