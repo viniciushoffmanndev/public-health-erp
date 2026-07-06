@@ -37,8 +37,22 @@ class OrgaoEmissorAdmin(admin.ModelAdmin):
 
 @admin.register(TabelaSubgrupoCbo)
 class TabelaSubgrupoCboAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'get_db_table')
-    def get_db_table(self, obj): return obj._meta.db_table
+    list_display = ('cd_grupo_cbo', 'cd_subgrupo_cbo', 'ds_subgrupo_cbo', 'version')
+    search_fields = ('ds_subgrupo_cbo',)
+    ordering = ('cd_grupo_cbo', 'cd_subgrupo_cbo')
+    list_display_links = None  # Remove os links de clique na listagem
+
+    # 1. Bloqueia a permissão de alteração (evita a rota /change/)
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    # 2. Bloqueia a permissão de adição (remove o botão "+ Add")
+    def has_add_permission(self, request):
+        return False
+
+    # 3. Bloqueia a permissão de exclusão
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 @admin.register(TabelaCboGrupoAtendimento)
 class TabelaCboGrupoAtendimentoAdmin(admin.ModelAdmin):
