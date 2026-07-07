@@ -151,7 +151,7 @@ class EquipeProfissional(models.Model):
     fl_equipe_minima = models.CharField(max_length=1, blank=True, null=True, db_column='fl_equipe_minima')
     micro_area = models.SmallIntegerField(blank=True, null=True, db_column='micro_area')
     version = models.BigIntegerField(db_column='version')
-    cd_eqp_micro_area = models.ForeignKey('institucional.EquipeMicroArea', models.DO_NOTHING, db_column='cd_eqp_micro_area', blank=True, null=True)
+    cd_eqp_micro_area = models.ForeignKey('geografia.EquipeMicroArea', models.DO_NOTHING, db_column='cd_eqp_micro_area', blank=True, null=True)
     cd_equipe = models.ForeignKey('institucional.Equipe', models.DO_NOTHING, db_column='cd_equipe')
     cd_usuario = models.DecimalField(max_digits=6, decimal_places=0, blank=True, null=True, db_column='cd_usuario')
     dt_usuario = models.DateTimeField(blank=True, null=True, db_column='dt_usuario')
