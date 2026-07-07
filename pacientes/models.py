@@ -128,7 +128,7 @@ class UsuarioCadsusMotivoCpf(models.Model):
 
 class Pessoa(models.Model):
     cod_pessoa = models.BigIntegerField(primary_key=True, db_column='cod_pessoa')
-    public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
+   # public_id = models.UUIDField(default=uuid6.uuid7, editable=False, unique=True, db_index=True, db_column='uuid_publico')
     descricao = models.CharField(max_length=80, db_column='descricao')
     fantasia = models.CharField(max_length=30, blank=True, null=True, db_column='fantasia')
     fis_jur = models.CharField(max_length=1, db_column='fis_jur')
