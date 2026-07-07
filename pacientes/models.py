@@ -1,14 +1,18 @@
 from django.db import models
-import uuid6
+#import uuid6
 
 
-class Atividade(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='atividade'
+class Atividade(models.Model):
+    cod_atv = models.IntegerField(primary_key=True, db_column='cod_atv')
+    descricao = models.CharField(max_length=60, db_column='descricao')
+    version = models.BigIntegerField(db_column='version')
+
+    class Meta:
+        managed = False
+        db_table = 'atividade'
 
     def __str__(self):
-        return f"Atividade {self.pk}"
+        return self.descricao
 
 
 class TipoPessoa(models.Model):
@@ -62,75 +66,142 @@ class Raca(models.Model):
 
 
 class EstadoCivil(models.Model):
-    class Meta: 
-        managed=False
-        db_table='estado_civil'
+    cd_estado_civil = models.SmallIntegerField(primary_key=True, db_column='cd_estado_civil')
+    ds_estado_civil = models.CharField(max_length=30, db_column='ds_estado_civil')
+    version = models.BigIntegerField(db_column='version')
+
+    class Meta:
+        managed = False
+        db_table = 'estado_civil'
+        verbose_name = 'Estado Civil'
+        verbose_name_plural = 'Estados Civis'
 
     def __str__(self):
-        return f"Estado Civil {self.pk}"
+        return self.ds_estado_civil
 
 
-class Escolaridade(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='escolaridade'
+class Escolaridade(models.Model):
+    cd_escolaridade = models.SmallIntegerField(primary_key=True, db_column='cd_escolaridade')
+    ds_escolaridade = models.CharField(max_length=50, db_column='ds_escolaridade')
+    version = models.BigIntegerField(db_column='version')
 
-    def __str__(self):
-        return f"Escolaridade {self.pk}"
-
-
-class LocalPermanencia(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='local_permanencia'
+    class Meta:
+        managed = False
+        db_table = 'escolaridade'
 
     def __str__(self):
-        return f"Local Permanência {self.pk}"
+        return self.ds_escolaridade
 
 
-class EtniaIndigena(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='etnia_indigena'
+class LocalPermanencia(models.Model):
+    cd_local_permanencia = models.BigIntegerField(primary_key=True, db_column='cd_local_permanencia')
+    ds_local_permanencia = models.CharField(max_length=100, db_column='ds_local_permanencia')
+    version = models.BigIntegerField(db_column='version')
+
+    class Meta:
+        managed = False
+        db_table = 'local_permanencia'
+        verbose_name = 'Local de Permanência'
+        verbose_name_plural = 'Locais de Permanência'
 
     def __str__(self):
-        return f"Etnia Indígena {self.pk}"
+        return self.ds_local_permanencia
+
+
+class EtniaIndigena(models.Model):
+    cd_etnia = models.BigIntegerField(primary_key=True, db_column='cd_etnia')
+    ds_etnia = models.CharField(max_length=100, db_column='ds_etnia')
+    cd_sus = models.CharField(max_length=20, blank=True, null=True, db_column='cd_sus')
+    version = models.BigIntegerField(db_column='version')
+    version_all = models.BigIntegerField(db_column='version_all')
+
+    class Meta:
+        managed = False
+        db_table = 'etnia_indigena'
+        verbose_name = 'Etnia Indígena'
+        verbose_name_plural = 'Etnias Indígenas'
+
+    def __str__(self):
+        return self.ds_etnia
     
 
-class GerenciadorArquivo(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='gerenciador_arquivo'
+class GerenciadorArquivo(models.Model):
+    cd_gerenciador_arquivo = models.BigIntegerField(primary_key=True, db_column='cd_gerenciador_arquivo')
+    cd_usuario = models.ForeignKey('profissionais.Usuarios', models.DO_NOTHING, db_column='cd_usuario')
+    dt_cadastro = models.DateTimeField(db_column='dt_cadastro')
+    nome_arquivo = models.CharField(max_length=255, db_column='nome_arquivo')
+    caminho = models.CharField(max_length=512, db_column='caminho')
+    origem_arquivo = models.IntegerField(db_column='origem_arquivo')
+    version = models.BigIntegerField(db_column='version')
+
+    class Meta:
+        managed = False
+        db_table = 'gerenciador_arquivo'
+
+    def __str__(self):
+        return f"Arquivo: {self.nome_arquivo}"
     
+
+class EquipeProfissional(models.Model):
+    cd_equipe_profissional = models.BigIntegerField(primary_key=True, db_column='cd_equipe_profissional')
+    cd_profissional = models.ForeignKey('profissionais.Profissional', models.DO_NOTHING, db_column='cd_profissional')
+    dt_entrada = models.DateField(blank=True, null=True, db_column='dt_entrada')
+    dt_desligamento = models.DateField(blank=True, null=True, db_column='dt_desligamento')
+    dt_atualizacao = models.DateTimeField(blank=True, null=True, db_column='dt_atualizacao')
+    fl_equipe_minima = models.CharField(max_length=1, blank=True, null=True, db_column='fl_equipe_minima')
+    micro_area = models.SmallIntegerField(blank=True, null=True, db_column='micro_area')
+    version = models.BigIntegerField(db_column='version')
+    cd_eqp_micro_area = models.ForeignKey('institucional.EquipeMicroArea', models.DO_NOTHING, db_column='cd_eqp_micro_area', blank=True, null=True)
+    cd_equipe = models.ForeignKey('institucional.Equipe', models.DO_NOTHING, db_column='cd_equipe')
+    cd_usuario = models.DecimalField(max_digits=6, decimal_places=0, blank=True, null=True, db_column='cd_usuario')
+    dt_usuario = models.DateTimeField(blank=True, null=True, db_column='dt_usuario')
+    status = models.SmallIntegerField(db_column='status')
+    version_all = models.BigIntegerField(unique=True, db_column='version_all')
+    flag_permite_visita_fora_microarea = models.SmallIntegerField(blank=True, null=True, db_column='flag_permite_visita_fora_microarea')
+    cd_cnes_processo = models.ForeignKey('institucional.CnesProcesso', models.DO_NOTHING, db_column='cd_cnes_processo', blank=True, null=True)
+    cd_cbo = models.CharField(max_length=10, blank=True, null=True, db_column='cd_cbo')
+
+    class Meta:
+        managed = False
+        db_table = 'equipe_profissional'
+        verbose_name = 'Vínculo de Equipe Profissional'
+        verbose_name_plural = 'Vínculos de Equipes Profissionais'
+
     def __str__(self):
-        return f"Gerenciador Arquivo {self.pk}"
-    
+        return f"Vínculo #{self.cd_equipe_profissional} (Equipe: {self.cd_equipe_id})"
 
-class EquipeProfissional(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='equipe_profissional'
+
+class ComunidadeTradicional(models.Model):
+    cd_comunidade = models.BigIntegerField(primary_key=True, db_column='cd_comunidade')
+    ds_comunidade = models.CharField(max_length=100, db_column='ds_comunidade')
+    cd_sus = models.CharField(max_length=20, blank=True, null=True, db_column='cd_sus')
+    version = models.BigIntegerField(db_column='version')
+    version_all = models.BigIntegerField(db_column='version_all')
+
+    class Meta:
+        managed = False
+        db_table = 'comunidade_tradicional'
+        verbose_name = 'Comunidade Tradicional'
+        verbose_name_plural = 'Comunidades Tradicionais'
 
     def __str__(self):
-        return f"Equipe Profissional {self.pk}"
-
-
-class ComunidadeTradicional(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='comunidade_tradicional'
-
-    def __str__(self):
-        return f"Comunidade Tradicional {self.pk}"
+        return self.ds_comunidade
 
 
 class UsuarioCadsusMotivoCpf(models.Model):
-    class Meta: 
-        managed=False
-        db_table='usuario_cadsus_motivo_cpf'
+    cd_motivo_cpf = models.BigIntegerField(primary_key=True, db_column='cd_motivo_cpf')
+    descricao = models.CharField(max_length=255, db_column='descricao')
+    ativo = models.BigIntegerField(db_column='ativo')
+    version = models.BigIntegerField(blank=True, null=True, db_column='version')
+
+    class Meta:
+        managed = False
+        db_table = 'usuario_cadsus_motivo_cpf'
+        verbose_name = 'Motivo de Ausência de CPF'
+        verbose_name_plural = 'Motivos de Ausência de CPF'
 
     def __str__(self):
-        return f"Motivo CPF {self.pk}"
+        return self.descricao
 
 
 class Pessoa(models.Model):
