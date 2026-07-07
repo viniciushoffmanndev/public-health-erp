@@ -11,13 +11,20 @@ class Atividade(models.Model):
         return f"Atividade {self.pk}"
 
 
-class TipoPessoa(models.Model): 
-    class Meta: 
-        managed=False
-        db_table='tipo_pessoa'
+class TipoPessoa(models.Model):
+    cod_tip_pessoa = models.IntegerField(primary_key=True, db_column='cod_tip_pessoa')
+    descricao = models.CharField(max_length=40, db_column='descricao')
+    sigla =  models.CharField(max_length=10, db_column='sigla')
+    version = models.BigIntegerField(db_column='version')
+
+    class Meta:
+        managed = False
+        db_table = 'tipo_pessoa'
+        verbose_name = 'Tipo de Pessoa'
+        verbose_name_plural = 'Tipos de Pessoa'
 
     def __str__(self):
-        return f"Tipo Pessoa {self.pk}"
+        return f"{self.sigla} - {self.descricao}"
 
 
 class Nacionalidade(models.Model): 
