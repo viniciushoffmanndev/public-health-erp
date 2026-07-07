@@ -45,12 +45,26 @@ class EnderecoEstruturado(models.Model):
     
     
 class EquipeMicroArea(models.Model):
-    class Meta: 
+    cd_eqp_micro_area = models.BigIntegerField(primary_key=True, db_column='cd_eqp_micro_area')
+    micro_area = models.IntegerField(db_column='micro_area')
+    version = models.BigIntegerField(db_column='version')
+    cd_equipe_profissional = models.BigIntegerField(blank=True, null=True, db_column='cd_equipe_profissional')  # Mantido como ID simples para evitar dependência circular direta agora
+    version_all = models.BigIntegerField(db_column='version_all')
+    cd_equipe_area = models.BigIntegerField(db_column='cd_equipe_area')  # ID simples de relacionamento geográfico
+    status = models.SmallIntegerField(db_column='status')
+    empresa = models.BigIntegerField(blank=True, null=True, db_column='empresa')
+
+    class Meta:
         managed = False
         db_table = 'equipe_micro_area'
-
+        verbose_name = 'Equipe Micro Área'
+        verbose_name_plural = 'Equipes Micro Áreas'
+    
     def __str__(self):
-        return f"Microárea {self.pk}"
+        return f"Microárea nº {self.micro_area} (ID: {self.cd_eqp_micro_area})"
+
+
+
     
 
 class EndEstruturadoDistrito(models.Model):
