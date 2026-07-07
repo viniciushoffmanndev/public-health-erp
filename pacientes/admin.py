@@ -1,6 +1,6 @@
 # Register your models here.
 from django.contrib import admin
-from .models import UsuarioCadsus, Pessoa, Nacionalidade
+from .models import UsuarioCadsus, Pessoa, Nacionalidade, TipoPessoa
 
 @admin.register(UsuarioCadsus)
 class UsuarioCadsusAdmin(admin.ModelAdmin):
@@ -39,6 +39,17 @@ class NacionalidadeAdmin(admin.ModelAdmin):
     search_fields = ('ds_pais', 'cd_pais')
     ordering = ('ds_pais',)
 
+    def has_add_permission(self, request): return False
+    def has_change_permission(self, request, obj=None): return False
+    def has_delete_permission(self, request, obj=None): return False
+
+@admin.register(TipoPessoa)
+class TipoPessoaAdmin(admin.ModelAdmin):
+    list_display = ('cod_tip_pessoa', 'descricao', 'sigla', 'version')
+    search_fields = ('descricao', 'sigla', 'cod_tip_pessoa')
+    ordering = ('cod_tip_pessoa',)
+
+    # Blindagem para tabelas de referência estática
     def has_add_permission(self, request): return False
     def has_change_permission(self, request, obj=None): return False
     def has_delete_permission(self, request, obj=None): return False
